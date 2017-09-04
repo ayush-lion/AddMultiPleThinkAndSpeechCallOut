@@ -17,25 +17,8 @@ public class InstructionStudent
 	private int width;
 	private boolean switchable;
 	
-	
-	/**
-	 * @return the switchable
-	 */
-	public boolean isSwitchable() {
-		return switchable;
-	}
-
-
-	/**
-	 * @param switchable the switchable to set
-	 */
-	public void setSwitchable(boolean switchable) {
-		this.switchable = switchable;
-	}
-
-
 	public InstructionStudent()
-	{
+	{ 
 		//default constructor
 		
 	}
@@ -58,16 +41,14 @@ public class InstructionStudent
 			for (int i = 0; i < strArray.length; i++) {
 				if (i != 0 && i % 5 == 0) {
 					sbuf.append("\n");
+					System.out.println(i);
+					count=i;
 				}
 				sbuf.append(strArray[i]).append(" ");
 			}
-			System.out.print(sbuf);
-			sb = sbuf.toString();
-			count++;
-			System.out.println(sb);
-			System.out.println(count);
-			
+			sb = sbuf.toString();			
 			g.drawImage(getImage(), getPosX(), getPosY(), getWidth(), getHeight(), null);
+			
 			g.setColor(Color.BLACK);	
 		        
 			g.setFont(g.getFont().deriveFont(12f));
@@ -129,6 +110,24 @@ public class InstructionStudent
 	public void setPosX(int posX) {
 		this.posX = posX;
 	}
+
+	
+
+	/**
+	 * @return the switchable
+	 */
+	public boolean isSwitchable() {
+		return switchable;
+	}
+
+
+	/**
+	 * @param switchable the switchable to set
+	 */
+	public void setSwitchable(boolean switchable) {
+		this.switchable = switchable;
+	}
+
 
 
 	/**

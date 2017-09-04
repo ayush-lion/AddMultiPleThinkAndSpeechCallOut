@@ -1,26 +1,86 @@
 package com.app.instruction;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class InstructionTutor {
 
 	// class for instruction structure
-
+	private int count = 0;
 	private String ins_text;
 	private String ins_shape;
+
 	private Image image;
 	private int posX;
 	private int posY;
 	private int width;
 	private boolean switchable;
+
+	private void drawString(Graphics g, String text, int x, int y) {
+		for (String line : text.split("\n"))
+			g.drawString(line, x, y += g.getFontMetrics().getHeight());
+	}
+
+	public void draw_instruction(Graphics g)
+
+	{
+		if (isSwitchable()) {
+			String sb = null;
+			String str = getIns_text();
+			String[] strArray = str.split(" ");
+			StringBuffer sbuf = new StringBuffer();
+
+			for (int i = 0; i < strArray.length; i++) {
+				if (i != 0 && i % 5 == 0) {
+					sbuf.append("\n");
+					count = i;
+				}
+				sbuf.append(strArray[i]).append(" ");
+				g.drawImage(getImage(), getPosX(), getPosY(), getWidth(), getHeight(), null);
+			}
+			sb = sbuf.toString();
+			g.setColor(Color.BLACK);
+			g.setFont(g.getFont().deriveFont(12f));
+			drawString(g, sb, getPosX() + 5, getPosY() + 20);
+		} else {
+			// g.setColor(Color.TRANSLUCENT);
+			g.setColor(Color.WHITE);
+			g.drawRect(getPosX(), getPosY(), getWidth(), getHeight());
+		}
+	}
+
+	private ArrayList<String> fragmentText(String text, int maxWidth) {
+		ArrayList<String> lines = new ArrayList<String>();
+		String line = "";
+		if (text.length() < maxWidth) {
+			lines.add(text);
+			return lines;
+		}
+
+		String[] words = text.split(" ");
+		boolean isAdded = false;
+		for (String word : words) {
+			String txt = line + word + " ";
+			int len = txt.length();
+			if (len >= maxWidth) {
+				isAdded = true;
+				lines.add(line);
+				line = word + " ";
+				txt = "";
+			} else {
+				isAdded = false;
+				line = txt;
+			}
+		}
+
+		if (!isAdded) {
+			lines.add(line);
+		}
+
+		return lines;
+	}
 
 	/**
 	 * @return the switchable
@@ -120,76 +180,12 @@ public class InstructionTutor {
 
 	}
 
-	private void drawString(Graphics g, String text, int x, int y) {
-		for (String line : text.split("\n"))
-			g.drawString(line, x, y += g.getFontMetrics().getHeight());
-	}
-	public void draw_instruction(Graphics g)
-
-	{
-		if (isSwitchable()) { 
-			int count=0;
-			String sb = null;
-			String str=getIns_text();
-			String[] strArray = str.split(" ");
-			StringBuffer sbuf = new StringBuffer();
-
-			for (int i = 0; i < strArray.length; i++) {
-				if (i != 0 && i % 5 == 0) {
-					sbuf.append("\n");
-				}
-				sbuf.append(strArray[i]).append(" ");
-			}
-			System.out.print(sbuf);
-			sb = sbuf.toString();
-			count++;
-			System.out.println(sb);
-			System.out.println(count);
-			
-			g.drawImage(getImage(), getPosX(), getPosY(), getWidth(), getHeight(), null);
-			g.setColor(Color.BLACK);	
-		        
-			g.setFont(g.getFont().deriveFont(12f));
-	        drawString(g, sb, getPosX()+5, getPosY()+20);
-			}
-	        
-			else
-			
-			{
-			//g.setColor(Color.TRANSLUCENT);
-			g.setColor(Color.WHITE);
-			g.drawRect(getPosX(), getPosY(), getWidth(), getHeight());
-			}
+	public int getCount() {
+		return count;
 	}
 
-	private ArrayList<String> fragmentText(String text, int maxWidth) {
-		ArrayList<String> lines = new ArrayList<String>();
-		String line = "";
-		if (text.length() < maxWidth) {
-			lines.add(text);
-			return lines;
-		}
-
-		String[] words = text.split(" ");
-		boolean isAdded = false;
-		for (String word : words) {
-			String txt = line + word + " ";
-			int len = txt.length();
-			if (len >= maxWidth) {
-				isAdded = true;
-				lines.add(line);
-				line = word + " ";
-				txt = "";
-			} else {
-				isAdded = false;
-				line = txt;
-			}
-		}
-		if (!isAdded) {
-			lines.add(line);
-		}
-
-		return lines;
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	public Image getImage() {
@@ -214,5 +210,10 @@ public class InstructionTutor {
 
 	public void setIns_text(String ins_text) {
 		this.ins_text = ins_text;
+	}
+
+	public static void main(String[] args) {
+		InstructionTutor obj = new InstructionTutor();
+		obj.getCount();
 	}
 }

@@ -26,15 +26,14 @@ public class InstructionController {
 	Image tutor_image, student_image, tutor_ins, student_ins, student_ins_thinking, tutor_ins_thinking, tutor_thinking,
 			student_thinking;
 
-
 	public InstructionController(InstructionPanel Panel) throws IOException {
 		this.panel = Panel;
 		actor_Tutor = new ActorTutor();
-		actor_Student = new ActorStudent();
+		actor_Student = new ActorStudent(); 
 		instruction_Student = new InstructionStudent();
 		instruction_Tutor = new InstructionTutor();
 		this.isProvided = false;
-		
+
 		// Initialize_Attributes(null);
 	}
 
@@ -98,35 +97,35 @@ public class InstructionController {
 	public void Initialize_Actors(Image tutor_image, Image student_image) {
 		actor_Tutor.setImage(tutor_image);
 		actor_Tutor.setPosX(panel.getX());
-		actor_Tutor.setPosY(panel.getY()/(5*6));
-		actor_Tutor.setHeight(panel.getHeight()*2/2);
-		actor_Tutor.setWidth(panel.getWidth()/5);
+		actor_Tutor.setPosY(panel.getY() / (5 * 6));
+		actor_Tutor.setHeight(panel.getHeight() * 2 / 2);
+		actor_Tutor.setWidth(panel.getWidth() / 5);
 
 		actor_Student.setActor_image(student_image);
-		actor_Student.setPosX(panel.getWidth()-panel.getWidth()/5);
-		actor_Student.setPosY(panel.getY()/5);
-		actor_Student.setHeight(panel.getHeight()*2/3);
-		actor_Student.setWidth(panel.getWidth()/6);
+		actor_Student.setPosX(panel.getWidth() - panel.getWidth() / 5);
+		actor_Student.setPosY(panel.getY() / 5);
+		actor_Student.setHeight(panel.getHeight() * 2 / 3);
+		actor_Student.setWidth(panel.getWidth() / 6);
 
 	}
 
 	public void Initialize_Instructions(String tutor_text, String student_text, Image tutor, Image student) {
 		instruction_Tutor.setIns_text(tutor_text);
 		instruction_Tutor.setImage(tutor);
-		instruction_Tutor.setPosX(panel.getX()+panel.getWidth()/5);
-		instruction_Tutor.setPosY(panel.getY()/5+25);
-		instruction_Tutor.setWidth(panel.getWidth()/4);
-		instruction_Tutor.setHeight(panel.getHeight()/2+10);
+		instruction_Tutor.setPosX(panel.getX() + panel.getWidth() / 5);
+		instruction_Tutor.setPosY(panel.getY() / 5 + 50);
+		instruction_Tutor.setWidth(panel.getWidth() / 4);
+		instruction_Tutor.setHeight(panel.getHeight() / 3);
 		instruction_Tutor.setSwitchable(true);
 
-		//System.out.println(""+tutor.toString()+""+student.toString());
-		
+		// System.out.println(""+tutor.toString()+""+student.toString());
+
 		instruction_Student.setIns_text(student_text);
 		instruction_Student.setImage(student);
-		instruction_Student.setPosX(panel.getX()+panel.getWidth()/2);
-		instruction_Student.setPosY(panel.getY()/5+25);
-		instruction_Student.setWidth(panel.getWidth()/4);
-		instruction_Student.setHeight(panel.getHeight()/2+10);
+		instruction_Student.setPosX(panel.getX() + panel.getWidth() / 2);
+		instruction_Student.setPosY(panel.getY() / 5 + 50);
+		instruction_Student.setWidth(panel.getWidth() / 4);
+		instruction_Student.setHeight(panel.getHeight() / 3);
 		instruction_Student.setSwitchable(true);
 	}
 
@@ -151,9 +150,7 @@ public class InstructionController {
 			instruction_Tutor.setSwitchable(true);
 			instruction_Tutor.setIns_text(text.replaceAll("\\<.*?>", ""));
 		}
-
 	}
-
 	public void TutorThinking(String text) {
 
 	}
@@ -177,7 +174,7 @@ public class InstructionController {
 	/**
 	 * @return the istutor_thinking
 	 */
-	
+
 	public boolean isIstutor_thinking() {
 		return istutor_thinking;
 	}
@@ -186,7 +183,7 @@ public class InstructionController {
 	 * @param istutor_thinking
 	 *            the istutor_thinking to set
 	 */
-	
+
 	public void setIstutor_thinking(boolean istutor_thinking) {
 		this.istutor_thinking = istutor_thinking;
 	}
@@ -194,7 +191,7 @@ public class InstructionController {
 	/**
 	 * @return the isStudent_thinking
 	 */
-	
+
 	public boolean isStudent_thinking() {
 		return isStudent_thinking;
 	}
@@ -203,12 +200,10 @@ public class InstructionController {
 	 * @param isStudent_thinking
 	 *            the isStudent_thinking to set
 	 */
-	
+
 	public void setStudent_thinking(boolean isStudent_thinking) {
 		this.isStudent_thinking = isStudent_thinking;
 	}
-
-	
 
 	/**
 	 * @return the tutor_thinking
@@ -361,7 +356,6 @@ public class InstructionController {
 	public void setStudent_text(String student_text) {
 		this.student_text = student_text;
 	}
-	
 
 	public void StudentThinking(String text) {
 

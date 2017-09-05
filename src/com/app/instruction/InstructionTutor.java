@@ -5,13 +5,15 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import com.app.instruction.panel.InstructionPanel;
+
 public class InstructionTutor {
 
 	// class for instruction structure
 	private int count = 0;
 	private String ins_text;
 	private String ins_shape;
-
+	private InstructionPanel panel;
 	private Image image;
 	private int posX;
 	private int posY;
@@ -26,6 +28,7 @@ public class InstructionTutor {
 	public void draw_instruction(Graphics g)
 
 	{
+
 		if (isSwitchable()) {
 			String sb = null;
 			String str = getIns_text();
@@ -33,19 +36,34 @@ public class InstructionTutor {
 			StringBuffer sbuf = new StringBuffer();
 
 			for (int i = 0; i < strArray.length; i++) {
-				if (i != 0 && i % 5 == 0) {
+				if (i != 0 && i % 6 == 0) {
 					sbuf.append("\n");
 					count = i;
 				}
 				sbuf.append(strArray[i]).append(" ");
-				g.drawImage(getImage(), getPosX(), getPosY(), getWidth(), getHeight(), null);
 			}
 			sb = sbuf.toString();
-			g.setColor(Color.BLACK);
 			g.setFont(g.getFont().deriveFont(12f));
-			drawString(g, sb, getPosX() + 5, getPosY() + 20);
+			g.setColor(Color.BLACK);
+			if(count<=6) 
+			{
+			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/5);    
+			}
+			else if(count>6)
+			{
+			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/4);    
+			}
+			else if(count>=18)
+			{
+		    g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/3);   
+			}
+			else 
+			{
+			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/2); 	
+			}
+			drawString(g, sb, getPosX() + 5, getPosY()+50);
 		} else {
-			// g.setColor(Color.TRANSLUCENT);
+			//g.setColor(Color.TRANSLUCENT);
 			g.setColor(Color.WHITE);
 			g.drawRect(getPosX(), getPosY(), getWidth(), getHeight());
 		}

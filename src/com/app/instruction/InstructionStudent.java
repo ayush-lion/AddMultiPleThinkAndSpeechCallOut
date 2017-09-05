@@ -39,20 +39,64 @@ public class InstructionStudent
 			StringBuffer sbuf = new StringBuffer();
 
 			for (int i = 0; i < strArray.length; i++) {
-				if (i != 0 && i % 5 == 0) {
+				if (i != 0 && i % 4 == 0) {
 					sbuf.append("\n");
 					System.out.println(i);
 					count=i;
 				}
 				sbuf.append(strArray[i]).append(" ");
 			}
-			sb = sbuf.toString();			
-			g.drawImage(getImage(), getPosX(), getPosY(), getWidth(), getHeight(), null);
+			sb = sbuf.toString();
+			System.out.println(count);
+			g.setColor(Color.BLACK);
 			
-			g.setColor(Color.BLACK);	
-		        
+			/**check include Student thinking Image*/
+			
+			//g.drawArc(getPosX()+170, getPosY()-115, 90, 150, 45, 360);
+			//g.drawArc(getPosX()+270, getPosY()-50, 15, 20, 45, 360);
+			//g.drawArc(getPosX()+300, getPosY()-40, 5, 10, 45, 360);
+			
+				
+			
+			if(count<=4) 
+				{
+				g.drawArc(getPosX(), getPosY()+50,getWidth() ,getHeight()/4, 45, 360);
+				g.drawArc(getPosX(), getPosY()+50,getWidth(),getHeight()/4, 45, 360);
+				g.drawArc(getPosX(), getPosY()+50,getWidth(),getHeight()/4, 45, 360);
+				
+				//g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/5);    
+				
+				}
+				else if(count>8)
+				{
+				g.drawArc(getPosX(), getPosY()+50,getWidth(),getHeight()/3, 45, 360);
+				g.drawArc(getPosX(), getPosY()+50,getWidth(),getHeight()/3, 45, 360);
+				g.drawArc(getPosX(), getPosY()+50,getWidth(),getHeight()/3, 45, 360);		
+					
+				//g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/4);    
+				
+				}
+				else if(count>=12)
+				{
+				g.drawArc(getPosX(), getPosY()+50,getWidth(),getHeight()/2, 45, 360);
+				g.drawArc(getPosX(), getPosY()+50,getWidth(),getHeight()/2, 45, 360);
+				g.drawArc(getPosX(), getPosY()+40,getWidth(),getHeight()/2, 45, 360);
+					
+				//g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/3);   
+				
+				}
+				else 
+				{
+				
+				g.drawArc(getPosX(), getPosY()+50,getWidth(),getHeight(), 45, 360);
+				g.drawArc(getPosX(), getPosY()+50,getWidth(),getHeight(), 45, 360);
+				g.drawArc(getPosX(), getPosY()+50,getWidth(),getHeight(), 45, 360);	
+				
+				//g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/2); 	
+				
+				}
 			g.setFont(g.getFont().deriveFont(12f));
-	        drawString(g, sb, getPosX()+5, getPosY()+20);
+	        drawString(g, sb, getPosX()+55, getPosY()+50);
 			}
 	        
 			else

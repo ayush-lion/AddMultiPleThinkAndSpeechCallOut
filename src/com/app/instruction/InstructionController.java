@@ -115,7 +115,7 @@ public class InstructionController {
 		instruction_Tutor.setPosX(panel.getX() + panel.getWidth() / 5);
 		instruction_Tutor.setPosY(panel.getY() / 5 + 50);
 		instruction_Tutor.setWidth(panel.getWidth() / 4);
-		instruction_Tutor.setHeight(panel.getHeight() / 3);
+		instruction_Tutor.setHeight(panel.getHeight());
 		instruction_Tutor.setSwitchable(true);
 
 		// System.out.println(""+tutor.toString()+""+student.toString());
@@ -125,7 +125,7 @@ public class InstructionController {
 		instruction_Student.setPosX(panel.getX() + panel.getWidth() / 2);
 		instruction_Student.setPosY(panel.getY() / 5 + 50);
 		instruction_Student.setWidth(panel.getWidth() / 4);
-		instruction_Student.setHeight(panel.getHeight() / 3);
+		instruction_Student.setHeight(panel.getHeight());
 		instruction_Student.setSwitchable(true);
 	}
 

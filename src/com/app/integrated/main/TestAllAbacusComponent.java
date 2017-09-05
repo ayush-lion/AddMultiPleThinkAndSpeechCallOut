@@ -503,6 +503,7 @@ public class TestAllAbacusComponent extends JFrame {
 		});
 
 		// Load Abacus
+		
 		loadAbacus.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

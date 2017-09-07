@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 
 import com.app.abacus.panel.exception.AbacusException;
 import com.app.instruction.panel.InstructionPanel;
-import com.app.instructions.compiler.Action;
+import com.app.instructions.beans.Action;
 import com.app.sound.SpeechController;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;

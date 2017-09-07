@@ -18,7 +18,7 @@ public class InstructionTag {
       * Throws a NullPointerException if element is null. */
     public InstructionTag(String element) {
         this(element, true);
-    } 
+    }
     
     /** Constructs an HTML tag with the given element (e.g. "table") and type.
       * Self-closing tags like <br /> are considered to be "opening" tags,

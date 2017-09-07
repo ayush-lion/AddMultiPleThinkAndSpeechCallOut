@@ -26,7 +26,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import com.app.instructions.compiler.Action;
+import com.app.instructions.beans.Action;
 import com.app.instructions.compiler.InstructionCompiler;
 import com.app.instructions.compiler.exception.CompilerException;
 
@@ -54,6 +54,7 @@ public class TestCompilerFrame extends JFrame {
 		this.setTitle("Abacus Instructions compiler");     
 		
         txtField = new JTextField();
+        //txtField.setText("/Users/prashant.joshi/Desktop/Abacus/Compiler/Postive testing.xlsx");
         txtField.setBounds(10, 10, 800 , 40);
         
         loadSheet = new JButton("Load Sheet");

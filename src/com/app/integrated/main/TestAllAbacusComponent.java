@@ -14,10 +14,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -37,12 +36,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-import com.app.abacus.Finger;
 import com.app.abacus.Frame;
 import com.app.abacus.panel.AbacusPanel;
 import com.app.abacus.panel.exception.AbacusException;
 import com.app.instruction.panel.InstructionPanel;
-import com.app.instructions.compiler.Action;
+import com.app.instructions.beans.Action;
 import com.app.instructions.compiler.InstructionCompiler;
 import com.app.instructions.compiler.exception.CompilerException;
 import com.app.sound.DownloadSpeech;
@@ -57,7 +55,7 @@ public class TestAllAbacusComponent extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	// Top panels
-	
+
 	private JPanel rightPanel;
 	private JPanel abacusTopPanel;
 	private JMenuBar menuBar;
@@ -79,9 +77,9 @@ public class TestAllAbacusComponent extends JFrame {
 	private JPanel tablepanel;
 	private JPanel playPanel;
 	String filenameatt;
-	
+
 	// Abacus Top Panel
-	
+
 	private JCheckBox doWeNeedFrame;
 	private JCheckBox doWeNeedFingers;
 	private JTextField attrTxt;
@@ -89,7 +87,7 @@ public class TestAllAbacusComponent extends JFrame {
 	private JButton showAbacus;
 	private JButton stopAbacus;
 	private JButton killButton;
-	
+
 	// Abacus Bead Up Panel
 
 	private String abacuspath;
@@ -109,8 +107,9 @@ public class TestAllAbacusComponent extends JFrame {
 	private JTable table;
 	private JCheckBoxMenuItem refresh;
 	private JCheckBoxMenuItem stop;
-	public TestAllAbacusComponent() throws Throwable {	
-		
+
+	public TestAllAbacusComponent() throws Throwable {
+
 		try {
 			this.getContentPane().setLayout(null);
 			this.setResizable(false);
@@ -118,24 +117,25 @@ public class TestAllAbacusComponent extends JFrame {
 			this.setBounds(100, 50, 1030, 665);
 			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			this.setBackground(Color.WHITE);
-			
+
 			/* Create Abacus Panel */
-			
+
 			panel = new AbacusPanel();
-			panel.setBounds(this.getX()/20, this.getY()/50, this.getWidth()-(23*10), this.getHeight()/2);
+			panel.setBounds(this.getX() / 20, this.getY() / 50, this.getWidth() - (23 * 10), this.getHeight() / 2);
 			setUpAbacusTopPanel();
 			instructionpanel = new InstructionPanel();
-			instructionpanel.setBounds(this.getX()/20, this.getY()*7-19, this.getWidth(), this.getHeight()/3+59);
-			 
+			instructionpanel.setBounds(this.getX() / 20, this.getY() * 7 - 19, this.getWidth(),
+					this.getHeight() / 3 + 59);
+
 			/* Create Abacus Play Controls */
-			
+
 			setupPlayPanel();
-			rightPanel=new JPanel();
-			rightPanel.setBounds(panel.getWidth(),panel.getY(),this.getWidth()-panel.getWidth(),panel.getHeight());
+			rightPanel = new JPanel();
+			rightPanel.setBounds(panel.getWidth(), panel.getY(), this.getWidth() - panel.getWidth(), panel.getHeight());
 			rightPanel.setBackground(Color.WHITE);
-			
+
 			/* Add Components to Frame */
-			
+
 			setupMenuBar();
 			this.getContentPane().add(rightPanel);
 			this.setJMenuBar(menuBar);
@@ -143,13 +143,13 @@ public class TestAllAbacusComponent extends JFrame {
 			this.getContentPane().add(panel);
 			this.getContentPane().add(instructionpanel);
 			instructionpanel.setLayout(null);
-			
+
 			// playPanel.repaint();
 
 			this.setVisible(true);
 
 			// panel.initializeAbacus();
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -454,7 +454,7 @@ public class TestAllAbacusComponent extends JFrame {
 		abacusTopPanel.setBounds(0, 0, 1050, 0);
 
 		// Buttons
-		
+
 		loadAbacus = new JButton("Load Abacus Instructions");
 		showAbacus = new JButton("Start");
 		stopAbacus = new JButton("Stop");
@@ -476,7 +476,7 @@ public class TestAllAbacusComponent extends JFrame {
 		});
 
 		// Fingers
-		
+
 		doWeNeedFingers = new JCheckBox("Show Fingers");
 		doWeNeedFingers.setSelected(true);
 		doWeNeedFingers.addActionListener(new ActionListener() {
@@ -494,7 +494,7 @@ public class TestAllAbacusComponent extends JFrame {
 
 		// Show Abacus Button
 		// showAbacus.setEnabled(Boolean.FALSE);
-		
+
 		showAbacus.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -503,7 +503,7 @@ public class TestAllAbacusComponent extends JFrame {
 		});
 
 		// Load Abacus
-		
+
 		loadAbacus.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -629,7 +629,6 @@ public class TestAllAbacusComponent extends JFrame {
 	 * @param args
 	 * @throws Throwable
 	 */
-	
 
 	/**
 	 * @return the instructionpath
@@ -705,8 +704,7 @@ public class TestAllAbacusComponent extends JFrame {
 	public void setAbacusprop(JCheckBoxMenuItem abacusprop) {
 		this.abacusprop = abacusprop;
 	}
-	
-	
+
 	public static void main(String[] args) throws Throwable {
 		TestAllAbacusComponent ob = new TestAllAbacusComponent();
 		SwingUtilities.invokeLater(new Runnable() {

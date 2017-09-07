@@ -268,7 +268,7 @@ public class TestInstructionComponent extends JFrame {
 	
 	
 	private void start_instructions(
-			LinkedHashMap<String, HashMap<String, List<com.app.instructions.compiler.Action>>> instructionData, InstructionPanel instruct) throws Throwable {
+			LinkedHashMap<String, HashMap<String, List<com.app.instructions.beans.Action>>> instructionData, InstructionPanel instruct) throws Throwable {
 		
 		//performer.setAbacusPanel(instruct);
 		performer = new InstructionPerformer();

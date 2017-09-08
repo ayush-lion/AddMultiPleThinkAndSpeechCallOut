@@ -397,7 +397,16 @@ public class InstructionController {
 	}
 
 	public void Draw_Instruction_Tutor(Graphics g) {
-		instruction_Tutor.draw_instruction(g);
+		
+		if(istutor_thinking)
+		{
+			instruction_Tutor.draw_instruction(g);
+		}
+		else
+		{
+			instruction_Tutor.draw_think(g);
+		}
+		
 	}
 
 	public void Draw_Instruction_Student(Graphics g) {

@@ -39,13 +39,13 @@ public class InstructionStudent {
 			for (int i = 0; i < strArray.length; i++) {
 				if (i != 0 && i % 6 == 0) {
 					sbuf.append("\n");
-					System.out.println(i);
+				//	System.out.println(i);
 					count = i;
 				}
 				sbuf.append(strArray[i]).append(" ");
 			}
 			sb = sbuf.toString();
-			System.out.println(count);
+			//System.out.println(count);
 			g.setColor(Color.BLACK);
 
 			/** check include Student thinking Image */

@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class Row {
 
-	private int width;
-	private int height;
+	private String width;
+	private String height;
 	private List<Col> cols;
 
 	/**
@@ -32,28 +32,28 @@ public class Row {
 	/**
 	 * @return the width
 	 */
-	public int getWidth() {
+	public String getWidth() {
 		return width;
 	}
 
 	/**
 	 * @param width the width to set
 	 */
-	public void setWidth(int width) {
+	public void setWidth(String width) {
 		this.width = width;
 	}
 
 	/**
 	 * @return the height
 	 */
-	public int getHeight() {
+	public String getHeight() {
 		return height;
 	}
 
 	/**
 	 * @param height the height to set
 	 */
-	public void setHeight(int height) {
+	public void setHeight(String height) {
 		this.height = height;
 	}
 	

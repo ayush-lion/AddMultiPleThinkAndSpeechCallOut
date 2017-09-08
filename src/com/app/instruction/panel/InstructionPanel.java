@@ -57,10 +57,10 @@ public class InstructionPanel extends JPanel
 	
 	public void performinstruction(String text, InstructionPanel panel)
 	{
-		//System.out.println(""+text);
 		if(text.startsWith("T:"))
 		{	
-			System.out.println("inside tutor");
+			//System.out.println("inside tutor");
+			
 			String test = text.replace("T:", "");
 			controller.setIstutor_thinking(istutorthinking);
 			controller.TutorInstructing(test.replaceAll("\\<.*?>",""));
@@ -68,7 +68,8 @@ public class InstructionPanel extends JPanel
 		}
 		else
 		{
-			System.out.println("inside student");
+			//System.out.println("inside student");
+			
 			String test = text.replace("S:", "");
 			controller.setStudent_thinking(isstudentthinking);
 			controller.StudentInstructing(test.replaceAll("\\<.*?>",""));
@@ -98,18 +99,21 @@ public class InstructionPanel extends JPanel
 	}
 	
 	private String replaceHTMLCharacters(String instruction) {
-		System.out.println(instruction);
+		//System.out.println(instruction);
+		
 		for (String htmlChar : listOfHtmlChars) {
 			instruction = instruction.replaceAll(htmlChar, "");
 		}
-		System.out.println(instruction);
+		
+		//System.out.println(instruction);
+		
 		return instruction;
 	}
 	
 	@Override
 	public void paint(Graphics g) {
 		//super.paint(g);
-		System.out.println("painted");
+		//System.out.println("painted");
 		controller.DrawInstructionPanel(g);
 	}
 	

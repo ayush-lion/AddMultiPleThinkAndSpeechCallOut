@@ -13,8 +13,12 @@ public class Component {
 	private String align;
 	private String teacherAlign;
 	private String studentAlign;
-	private int numOfRods;
+	private String numOfRods;
+	private String image;
 	
+	public void setImage(String image) {
+		this.image = image;
+	}
 	/**
 	 * @return the name
 	 */
@@ -66,13 +70,13 @@ public class Component {
 	/**
 	 * @return the numOfRods
 	 */
-	public int getNumOfRods() {
+	public String getNumOfRods() {
 		return numOfRods;
 	}
 	/**
 	 * @param numOfRods the numOfRods to set
 	 */
-	public void setNumOfRods(int numOfRods) {
+	public void setNumOfRods(String numOfRods) {
 		this.numOfRods = numOfRods;
 	}
 	
@@ -86,10 +90,14 @@ public class Component {
 			buf.append(" :: ").append("Teacher Align => ").append(teacherAlign);
 		if(studentAlign != null)
 			buf.append(" :: ").append("Student Align => ").append(studentAlign);
-		if(numOfRods != 0)
+		if(numOfRods != "0")
 			buf.append(" :: ").append("Number Of Rods => ").append(numOfRods);
 		buf.append("\n");
 		return buf.toString();
+	}
+	public String getImage() {
+		// TODO Auto-generated method stub
+		return image;
 	}
 	
 }

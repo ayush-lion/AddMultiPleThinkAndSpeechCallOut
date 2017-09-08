@@ -39,6 +39,7 @@ import javax.swing.table.TableColumn;
 import com.app.abacus.Frame;
 import com.app.abacus.panel.AbacusPanel;
 import com.app.abacus.panel.exception.AbacusException;
+import com.app.abacusResult.ResultPanel;
 import com.app.instruction.panel.InstructionPanel;
 import com.app.instructions.beans.Action;
 import com.app.instructions.compiler.InstructionCompiler;
@@ -56,7 +57,7 @@ public class TestAllAbacusComponent extends JFrame {
 
 	// Top panels
 
-	private JPanel rightPanel;
+	private ResultPanel rightPanel;
 	private JPanel abacusTopPanel;
 	private JMenuBar menuBar;
 	private JMenu menu;
@@ -130,13 +131,13 @@ public class TestAllAbacusComponent extends JFrame {
 			/* Create Abacus Play Controls */
 
 			setupPlayPanel();
-			rightPanel = new JPanel();
+			rightPanel = new ResultPanel();
 			rightPanel.setBounds(panel.getWidth(), panel.getY(), this.getWidth() - panel.getWidth(), panel.getHeight());
-			rightPanel.setBackground(Color.WHITE);
 
 			/* Add Components to Frame */
 
 			setupMenuBar();
+			
 			this.getContentPane().add(rightPanel);
 			this.setJMenuBar(menuBar);
 			this.getContentPane().add(abacusTopPanel);
@@ -366,8 +367,11 @@ public class TestAllAbacusComponent extends JFrame {
 					if (result == JFileChooser.APPROVE_OPTION) {
 						File selectedFile = jFileChooser.getSelectedFile();
 						attrTxt.setText(selectedFile.getAbsolutePath());
-						// panel.setAbacusAttributesFileName(attrTxt.getText());
-						// showAbacus.setEnabled(true);
+
+						/*
+						 * panel.setAbacusAttributesFileName(attrTxt.getText());
+						 * showAbacus.setEnabled(true);
+						 */
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();

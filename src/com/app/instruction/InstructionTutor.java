@@ -25,10 +25,15 @@ public class InstructionTutor {
 			g.drawString(line, x, y += g.getFontMetrics().getHeight());
 	}
 
+	
+	public void draw_think(Graphics g)
+	{
+		
+	}
+	
 	public void draw_instruction(Graphics g)
 
 	{
-
 		if (isSwitchable()) {
 			String sb = null;
 			String str = getIns_text();

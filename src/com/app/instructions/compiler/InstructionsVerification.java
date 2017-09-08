@@ -690,7 +690,8 @@ public class InstructionsVerification {
 										nAction.setFinger(act.substring(16));
 									} 
 								}
-								break;	
+								break;
+							
 						}
 						listOfActions.add(nAction);
 					}

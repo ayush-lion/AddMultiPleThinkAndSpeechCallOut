@@ -22,10 +22,10 @@ public class Layout {
 		return numOfRow;
 	}
 	/**
-	 * @param numOfRow the numOfRow to set
+	 * @param i the numOfRow to set
 	 */
-	public void setNumOfRow(int numOfRow) {
-		this.numOfRow = numOfRow;
+	public void setNumOfRow(int i) {
+		this.numOfRow = i;
 	}
 	/**
 	 * @return the numOfCols
@@ -34,10 +34,10 @@ public class Layout {
 		return numOfCols;
 	}
 	/**
-	 * @param numOfCols the numOfCols to set
+	 * @param i the numOfCols to set
 	 */
-	public void setNumOfCols(int numOfCols) {
-		this.numOfCols = numOfCols;
+	public void setNumOfCols(int i) {
+		this.numOfCols = i;
 	}
 	/**
 	 * @return the rows

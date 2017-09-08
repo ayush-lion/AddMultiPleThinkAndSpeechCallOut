@@ -51,15 +51,13 @@ public class InstructionCompiler {
 		instructionData = new LinkedHashMap<>();
 
 		// Get the values from properties
-		properties = InstructionsPropertyLoader.getAllPropertiesFromResource("compiler.properties");
+		properties = InstructionsPropertyLoader.getAllPropertiesFromResource("IntegratedCompiler.properties");
 		List<String> listOfValidTags = Arrays.asList(properties.get("tags").split(","));
 		List<String> noClosingTags = Arrays.asList(properties.get("noClosingTags").split(","));
 		List<String> commands = Arrays.asList(properties.get("commands").split(","));
 
-		// List<String> specialCommands =
-		// Arrays.asList(properties.get("specialCommands").split(","));
-
-		// insActionStartRow = Integer.parseInt(properties.get("insActionStartRow"));
+		List<String> specialCommands = Arrays.asList(properties.get("specialCommands").split(","));
+		insActionStartRow = Integer.parseInt(properties.get("insActionStartRow"));
 
 		// Setting up logging details
 		logger.setLoggingDebug(isTrueOrFalse(properties, "loggingDebug"));
@@ -73,8 +71,7 @@ public class InstructionCompiler {
 		instructionVerifier.setListOfValidTags(listOfValidTags);
 		instructionVerifier.setNoClosingTags(noClosingTags);
 		instructionVerifier.setCommands(commands);
-
-		// instructionVerifier.setSpecialCommands(specialCommands);
+		instructionVerifier.setSpecialCommands(specialCommands);
 
 		// Print list of valid tags
 		logger.logDebug(listOfValidTags);

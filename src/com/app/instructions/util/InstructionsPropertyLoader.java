@@ -36,7 +36,7 @@ public class InstructionsPropertyLoader {
 	private static Properties getPropertyHandleFromResource(String propertiesFileName) throws CompilerException {
 		try {
 			if(prop.isEmpty()) {
-				System.out.println("propertiesFileName : " + propertiesFileName);
+				//System.out.println("propertiesFileName : " + propertiesFileName);
 				InputStream inputStream = InstructionsPropertyLoader.class.getClassLoader().getResourceAsStream(propertiesFileName);
 				prop.load(inputStream);
 			}
@@ -52,7 +52,7 @@ public class InstructionsPropertyLoader {
 	private static Properties getPropertyHandleFromFile(String propertiesFileName) throws CompilerException {
 		try {
 			if(prop.isEmpty()) {
-				System.out.println("propertiesFileName : " + propertiesFileName);
+				//System.out.println("propertiesFileName : " + propertiesFileName);
 				File file = new File(propertiesFileName);
 				if(file.exists() && file.isFile()) {
 					FileReader fr = new FileReader(file);

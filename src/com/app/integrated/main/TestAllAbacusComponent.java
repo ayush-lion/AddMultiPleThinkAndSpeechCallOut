@@ -33,7 +33,6 @@ import javax.swing.table.TableColumn;
 
 import com.app.abacus.Frame;
 import com.app.abacus.panel.AbacusPanel;
-import com.app.abacus.panel.exception.AbacusException;
 import com.app.imagePanel.ImagePanel;
 import com.app.instruction.panel.InstructionPanel;
 import com.app.instructions.beans.Action;
@@ -52,21 +51,9 @@ public class TestAllAbacusComponent extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	// Top panels
-	
 
 	LinkedHashMap<String, HashMap<String, List<Action>>> data;
 
-	private String align;
-	private String teacherAlign;
-	private String studentAlign;
-	private String numOfRods;
-	private String componentWidth;
-	private String componentHeight;
-	private String name;
-	private String componentSize;
-	private int numOfRow;
-	private int numOfCols;
-	
 	private JMenuBar menuBar;
 
 	private JMenu menu;
@@ -115,7 +102,7 @@ public class TestAllAbacusComponent extends JFrame {
 	private int mainPanelheight = 700;
 
 	private int topic_width = 100;
-	private int topic_height = 10;
+	private int topic_height = 20;
 
 	private int abacus_width = 100;
 	private int abacus_height = 50;
@@ -176,7 +163,7 @@ public class TestAllAbacusComponent extends JFrame {
 			setBoundsInstruction();
 			setBoundsImage();
 
-			mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+			mainPanel.setLayout(null);
 
 			mainPanel.add(topicPanel);
 			mainPanel.add(abacusPanel);
@@ -191,7 +178,7 @@ public class TestAllAbacusComponent extends JFrame {
 
 			this.setJMenuBar(menuBar);
 			this.add(mainPanel);
-			this.setSize(1030, 700);
+			this.setSize(getMainPanelWidth(), getMainPanelheight());
 			this.setVisible(true);
 
 		} catch (Exception e) {
@@ -220,84 +207,19 @@ public class TestAllAbacusComponent extends JFrame {
 		column = table.getColumnModel().getColumn(2);
 		column.setPreferredWidth(600);
 	}
-	
 
 	/** list of actions into an HashMap */
-
-	public void start_beforInstructing() throws AbacusException {
-		Set<Entry<String, HashMap<String, List<Action>>>> entrySet = data.entrySet();
-		int i = 0;
-		HashMap<String, String> actionMap = new HashMap<String, String>();
-		for (Entry<String, HashMap<String, List<Action>>> entry : entrySet) {
-
-			Object[] tableRow = new Object[9];
-			String key = entry.getKey();
-			tableRow[0] = key;
-			HashMap<String, List<Action>> map = entry.getValue();
-			Set<Entry<String, List<Action>>> sEntry = map.entrySet();
-			for (Entry<String, List<Action>> entry2 : sEntry) {
-				i++;
-				String instruction = entry2.getKey();
-				// instructionPanel.performinstruction(instruction, instructionPanel);
-				List<Action> listOfActions = entry2.getValue();
-				for (Action actionlist : listOfActions) {
-
-					if (actionlist.getActionName().contains("Font")) {
-						setName(String.valueOf(actionlist.getFont().getName()));
-						setComponentSize(String.valueOf(actionlist.getFont().getSize()));
-						System.out.println("name of Font:" + getName());
-						System.out.println("size of font:" + getSize()); 
-					}
-
-					if (actionlist.getActionName().contains("Layout")) {
-						setNumOfRow((actionlist.getLayout().getNumOfRow()));
-						setNumOfCols((actionlist.getLayout().getNumOfCols()));
-
-						for (int j = 0; j < actionlist.getLayout().getRows().size(); j++) {
-							setComponentHeight((String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
-							setComponentWidth(String.valueOf(actionlist.getLayout().getRows().get(j).getWidth()));
-							System.out.println("number of rows:" + getNumOfRow());
-							System.out.println("number of cols:" + getNumOfCols());
-							System.out.println("hight of rows:" + getHeight());
-							System.out.println("width of rows:" + getWidth());
-						}
-					}
-					if (actionlist.getActionName().contains("Component")) {
-						setNumOfRods((actionlist.getComponent().getNumOfRods()));
-						setName((actionlist.getComponent().getName()));
-						
-						setTeacherAlign((actionlist.getComponent().getTeacherAlign()));
-						setStudentAlign((actionlist.getComponent().getStudentAlign()));
-
-						setName((actionlist.getComponent().getName()));
-						setAlign(actionlist.getComponent().getAlign());
-						
-						System.out.println("number of rods:"+getNumOfRods());
-						System.out.println("name of component:"+getName());
-						
-						System.out.println("alignment of teacher:"+getTeacherAlign());
-						System.out.println("alignment of Student:"+getStudentAlign());
-						
-						System.out.println("get align:"+getAlign());
-
-						// setImage((actionlist.getComponent().getImage()));
-					}
-				}
-			}
-		}
-	}
-	
 
 	public void setBoundsTopic() {
 		topicPanel.setBounds(getPosX(), getPosY(), getMainPanelWidth() * getTopic_width() / 100,
 				(getMainPanelheight() * getTopic_height() / 100));
-		//topicPanel.setBackground(Color.LIGHT_GRAY);
+		topicPanel.setBackground(Color.LIGHT_GRAY);
 	}
 
 	public void setBoundsAbacus() {
 		abacusPanel.setBounds(getPosX(), getMainPanelheight() * getTopic_height() / 100,
 				getMainPanelWidth() * getAbacus_width() / 100, (getMainPanelheight() * getAbacus_height() / 100));
-		//abacusPanel.setBackground(Color.white);
+		abacusPanel.setBackground(Color.white);
 
 	}
 
@@ -306,7 +228,7 @@ public class TestAllAbacusComponent extends JFrame {
 				(getMainPanelheight() * getTopic_height() / 100) + (getMainPanelheight() * getAbacus_height() / 100),
 				(getMainPanelWidth() * getInstruction_width()) / 100,
 				(getMainPanelheight() * getInstruction_height() / 100));
-		//instructionpanel.setBackground(Color.gray);
+		instructionpanel.setBackground(Color.gray);
 
 	}
 
@@ -315,7 +237,7 @@ public class TestAllAbacusComponent extends JFrame {
 				(getMainPanelheight() * getTopic_height() / 100) + (getMainPanelheight() * getAbacus_height() / 100)
 						+ (getMainPanelheight() * getInstruction_height() / 100),
 				(getMainPanelWidth() * getImage_width() / 100), (getMainPanelheight() * getImage_hight() / 100));
-		//imagePanel.setBackground(Color.cyan);
+		imagePanel.setBackground(Color.cyan);
 
 	}
 
@@ -446,7 +368,7 @@ public class TestAllAbacusComponent extends JFrame {
 					if (result == JFileChooser.APPROVE_OPTION) {
 						File selectedFile = jFileChooser.getSelectedFile();
 						attrTxt.setText(selectedFile.getAbsolutePath());
-					    abacusPanel.setAbacusAttributesFileName(attrTxt.getText());
+						abacusPanel.setAbacusAttributesFileName(attrTxt.getText());
 						showAbacus.setEnabled(true);
 					}
 				} catch (Exception e1) {
@@ -473,7 +395,7 @@ public class TestAllAbacusComponent extends JFrame {
 						File selectedFile = jFileChooser.getSelectedFile();
 						attrTxt.setText(selectedFile.getAbsolutePath());
 						setInstructionpath(attrTxt.getText());
-						System.out.println("instruction prop" + getInstructionpath());
+						// System.out.println("instruction prop" + getInstructionpath());
 
 						instructionpanel.setAttributespath(selectedFile.getAbsolutePath());
 						instructionpanel.Initialize_Instruction_Panel(instructionpanel);
@@ -523,6 +445,7 @@ public class TestAllAbacusComponent extends JFrame {
 				// TODO Auto-generated method stub
 				compile(attrTxt.getText().toString());
 				startcheck.setSelected(false);
+
 			}
 		});
 
@@ -532,28 +455,29 @@ public class TestAllAbacusComponent extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				refresh.setSelected(false);
-				topicPanel.repaint();
 
-				// abacusPanel.showAbacus();
+				setTopic_height(Integer.parseInt(performer.getTopicHeight().replace("null", "")));
+				setTopic_width(Integer.parseInt(performer.getTopicWidth().replace("null", "")));
 
-				abacusPanel.repaint();
+				setAbacus_height(Integer.parseInt(performer.getAbacusHight().replace("null", "")));
+				setAbacus_width(Integer.parseInt(performer.getAbacusWidth().replace("null", "")));
 
-				setTopic_height(10);
-				setAbacus_height(50);
-				setInstruction_height(20);
-				setImage_hight(20);
+				setInstruction_height(Integer.parseInt(performer.getInstructionHight().replace("null", "")));
+				setInstruction_width(Integer.parseInt(performer.getInstructionWidth().replace("null", "")));
+
+				setImage_hight(Integer.parseInt(performer.getActorHight().replace("null", "")));
+				setImage_width(Integer.parseInt(performer.getWidth().replace("null", "")));
 
 				setBoundsTopic();
 				setBoundsAbacus();
 				setBoundsInstruction();
 				setBoundsImage();
-
-				try {
-					instructionpanel.Initialize_Instruction_Panel(instructionpanel);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
+				topicPanel.repaint();
+				instructionpanel.repaint();
+				abacusPanel.repaint();
+				imagePanel.repaint();
+				
 				// TODO Auto-generated method stub
 			}
 		});
@@ -563,10 +487,10 @@ public class TestAllAbacusComponent extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// abacusPanel.showAbacus();
+				abacusPanel.showAbacus();
 				performer.stopPlayback();
 				try {
-					 instructionpanel.Initialize_Instruction_Panel(instructionpanel);
+					instructionpanel.Initialize_Instruction_Panel(instructionpanel);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -672,7 +596,7 @@ public class TestAllAbacusComponent extends JFrame {
 		killButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					 abacusPanel.initializeAbacus();
+					abacusPanel.initializeAbacus();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -763,118 +687,17 @@ public class TestAllAbacusComponent extends JFrame {
 	 * @throws Throwable
 	 */
 
-	
-	
 	public int getTopic_width() {
 		return topic_width;
 	}
-
-	public String getComponentWidth() {
-		return componentWidth;
-	}
-
-
-	public void setComponentWidth(String componentWidth) {
-		this.componentWidth = componentWidth;
-	}
-
-
-	public String getComponentHeight() {
-		return componentHeight;
-	}
-
-
-	public void setComponentHeight(String componentHeight) {
-		this.componentHeight = componentHeight;
-	}
-
-
-	public String getComponentSize() {
-		return componentSize;
-	}
-
-
-	public void setComponentSize(String componentSize) {
-		this.componentSize = componentSize;
-	}
-
-
-	public String getAlign() {
-		return align;
-	}
-
-
-	public void setAlign(String align) {
-		this.align = align;
-	}
-
-
-	public String getTeacherAlign() {
-		return teacherAlign;
-	}
-
-
-	public void setTeacherAlign(String teacherAlign) {
-		this.teacherAlign = teacherAlign;
-	}
-
-
-	public String getStudentAlign() {
-		return studentAlign;
-	}
-
-
-	public void setStudentAlign(String studentAlign) {
-		this.studentAlign = studentAlign;
-	}
-
-
-	public String getNumOfRods() {
-		return numOfRods;
-	}
-
-
-	public void setNumOfRods(String numOfRods) {
-		this.numOfRods = numOfRods;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getNumOfRow() {
-		return numOfRow;
-	}
-
-
-	public void setNumOfRow(int numOfRow) {
-		this.numOfRow = numOfRow;
-	}
-
-
-	public int getNumOfCols() {
-		return numOfCols;
-	}
-
-
-	public void setNumOfCols(int numOfCols) {
-		this.numOfCols = numOfCols;
-	}
-
 
 	public JMenu getNatural() {
 		return natural;
 	}
 
-
 	public void setNatural(JMenu natural) {
 		this.natural = natural;
 	}
-
 
 	public int getImage_hight() {
 		return image_hight;
@@ -1048,10 +871,10 @@ public class TestAllAbacusComponent extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ob.start_beforInstructing();
+
 					ob.showPanel();
-					
-				} catch (IOException | AbacusException e) {
+
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

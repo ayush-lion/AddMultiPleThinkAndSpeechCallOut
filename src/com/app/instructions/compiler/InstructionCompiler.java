@@ -84,7 +84,7 @@ public class InstructionCompiler {
 	public boolean compileInstructions() throws CompilerException {
 		if (validateFile()) {
 			reader = new ExcelReader(instructionFile);
-
+ 
 			// Parse the sheet
 			reader.parseExcelSheet();
 

@@ -15,7 +15,7 @@ import com.app.utils.InstructionAttributeLoader;
 public class InstructionController {
 	ActorStudent actor_Student;
 	ActorTutor actor_Tutor;
-	boolean istutor_thinking = false;
+	boolean istutor_thinking = false; 
 	boolean isStudent_thinking = false;
 
 	InstructionStudent instruction_Student;
@@ -69,6 +69,7 @@ public class InstructionController {
 		setTutor_text(attributes.get("tutor_text"));
 		setStudent_thinking(getImage(attributes.get("student_thinking")));
 		setTutor_thinking(getImage(attributes.get("tutor_thinking")));
+		
 		Initialize_Actors(getTutor_image(), getStudent_image());
 		Initialize_Instructions(getTutor_text(), getStudent_text(), getTutor_ins(), getStudent_ins());
 	}
@@ -96,13 +97,13 @@ public class InstructionController {
 	public void Initialize_Actors(Image tutor_image, Image student_image) {
 		actor_Tutor.setImage(tutor_image);
 		actor_Tutor.setPosX(panel.getX());
-		actor_Tutor.setPosY(panel.getY() / (5 * 6));
+		actor_Tutor.setPosY(panel.getY() / (5 * 12));
 		actor_Tutor.setHeight(panel.getHeight() * 2 / 2);
 		actor_Tutor.setWidth(panel.getWidth() / 5);
 
 		actor_Student.setActor_image(student_image);
 		actor_Student.setPosX(panel.getWidth() - panel.getWidth() / 5);
-		actor_Student.setPosY(panel.getY() / 5);
+		actor_Student.setPosY(panel.getY() / 11);
 		actor_Student.setHeight(panel.getHeight() * 2 / 3);
 		actor_Student.setWidth(panel.getWidth() / 6);
 
@@ -112,7 +113,7 @@ public class InstructionController {
 		instruction_Tutor.setIns_text(tutor_text);
 		instruction_Tutor.setImage(tutor);
 		instruction_Tutor.setPosX(panel.getX() + panel.getWidth() / 5);
-		instruction_Tutor.setPosY(panel.getY() / 5 + 50);
+		instruction_Tutor.setPosY(panel.getY() / 70);
 		instruction_Tutor.setWidth(panel.getWidth() / 4);
 		instruction_Tutor.setHeight(panel.getHeight());
 		instruction_Tutor.setSwitchable(true);
@@ -122,7 +123,7 @@ public class InstructionController {
 		instruction_Student.setIns_text(student_text);
 		instruction_Student.setImage(student);
 		instruction_Student.setPosX(panel.getX() + panel.getWidth() / 2);
-		instruction_Student.setPosY(panel.getY() / 5 + 50);
+		instruction_Student.setPosY(panel.getY() / 70);
 		instruction_Student.setWidth(panel.getWidth() / 4);
 		instruction_Student.setHeight(panel.getHeight());
 		instruction_Student.setSwitchable(true);

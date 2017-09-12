@@ -17,7 +17,7 @@ public class Topic  {
 	public Topic() {
 		// TODO Auto-generated constructor stub
 	}
-
+ 
 	public void drawTopic(Graphics g) {
 
 		g.setColor(Color.BLACK);

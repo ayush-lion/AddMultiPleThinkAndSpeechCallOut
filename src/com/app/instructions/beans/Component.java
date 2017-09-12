@@ -11,7 +11,7 @@ public class Component {
 
 	private String name;
 	private String align;
-	private String teacherAlign;
+	private String teacherAlign; 
 	private String studentAlign;
 	private String numOfRods;
 	private String image;

@@ -285,7 +285,7 @@ public class InstructionsVerification {
 					//Parse Component
 					String component = getComponentFromAction(act, errors);
 					
-					System.out.println("Width ==> " + width + ", Height ==> " + height + ", Component ==> " + component);
+					//System.out.println("Width ==> " + width + ", Height ==> " + height + ", Component ==> " + component);
 					
 					if(col != null) {
 						row.setWidth(row.getWidth() + width);

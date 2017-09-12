@@ -156,7 +156,7 @@ public class TestAbacusComponent extends JFrame {
 		
 		bDownRod = new JTextField();
 		bDownBead = new JTextField();
-		bDownBut = new JButton("Move Bead Down");
+		bDownBut = new JButton("Move Bead Down"); 
 		bDownBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

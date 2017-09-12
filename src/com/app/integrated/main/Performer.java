@@ -22,10 +22,21 @@ public class Performer implements Runnable {
 	private String teacherAlign;
 	private String studentAlign;
 	private String numOfRods;
-	private String width;
-	private String height;
+
+	private String topicHeight;
+	private String topicWidth;
+
+	private String abacusHight;
+	private String abacusWidth;
+
+	private String instructionHight;
+	private String instructionWidth;
+
+	private String actorHight;
+	private String actorWidth;
+
 	private String name;
-	private String size;
+	private String componentSize;
 	private int numOfRow;
 	private int numOfCols;
 
@@ -41,8 +52,65 @@ public class Performer implements Runnable {
 	/**
 	 * @return the isPlayRobotics
 	 */
-	
+
 	private String image;
+
+	public String getTopicHeight() {
+		return topicHeight;
+	}
+
+	public void setTopicHeight(String topicHeight) {
+		this.topicHeight = topicHeight;
+	}
+
+	public String getTopicWidth() {
+		return topicWidth;
+	}
+
+	public void setTopicWidth(String topicWidth) {
+		this.topicWidth = topicWidth;
+	}
+
+	public String getAbacusHight() {
+		return abacusHight;
+	}
+
+	public void setAbacusHight(String abacusHight) {
+		this.abacusHight = abacusHight;
+	}
+
+	public String getAbacusWidth() {
+		return abacusWidth;
+	}
+
+	public void setAbacusWidth(String abacusWidth) {
+		this.abacusWidth = abacusWidth;
+	}
+
+	public String getActorHight() {
+		return actorHight;
+	}
+
+	public void setActorHight(String actorHight) {
+		this.actorHight = actorHight;
+	}
+
+	public String getActorWidth() {
+		return actorWidth;
+	}
+
+	public void setActorWidth(String actorWidth) {
+		this.actorWidth = actorWidth;
+	}
+
+	public String getComponentSize() {
+		return componentSize;
+	}
+
+	public void setComponentSize(String componentSize) {
+		this.componentSize = componentSize;
+	}
+
 	public String getImage() {
 		return image;
 	}
@@ -50,7 +118,7 @@ public class Performer implements Runnable {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
+
 	public boolean isPlayRobotics() {
 		return isPlayRobotics;
 	}
@@ -88,19 +156,19 @@ public class Performer implements Runnable {
 	}
 
 	public String getWidth() {
-		return width;
+		return topicWidth;
 	}
 
 	public void setWidth(String width) {
-		this.width = width;
+		this.topicWidth = width;
 	}
 
 	public String getHeight() {
-		return height;
+		return topicHeight;
 	}
 
 	public void setHeight(String height) {
-		this.height = height;
+		this.topicHeight = height;
 	}
 
 	public String getName() {
@@ -112,11 +180,11 @@ public class Performer implements Runnable {
 	}
 
 	public String getSize() {
-		return size;
+		return componentSize;
 	}
 
 	public void setSize(String size) {
-		this.size = size;
+		this.componentSize = size;
 	}
 
 	/**
@@ -154,7 +222,7 @@ public class Performer implements Runnable {
 	public int getNumOfRow() {
 		return numOfRow;
 	}
-
+	
 	public void setNumOfRow(int numOfRow) {
 		this.numOfRow = numOfRow;
 	}
@@ -180,6 +248,22 @@ public class Performer implements Runnable {
 	 */
 	public void setInstructionPanel(InstructionPanel instructionPanel) {
 		this.instructionPanel = instructionPanel;
+	}
+
+	public String getInstructionHight() {
+		return instructionHight;
+	}
+
+	public void setInstructionHight(String instructionHight) {
+		this.instructionHight = instructionHight;
+	}
+
+	public String getInstructionWidth() {
+		return instructionWidth;
+	}
+
+	public void setInstructionWidth(String instructionWidth) {
+		this.instructionWidth = instructionWidth;
 	}
 
 	/**
@@ -301,13 +385,14 @@ public class Performer implements Runnable {
 				i++;
 				String instruction = entry2.getKey();
 				// instructionPanel.performinstruction(instruction, instructionPanel);
-				playRoboticsVoice(instruction);
 				List<Action> listOfActions = entry2.getValue();
 				for (Action actionlist : listOfActions) {
 
 					if (actionlist.getActionName().contains("Font")) {
 						setName(String.valueOf(actionlist.getFont().getName()));
-						setSize(String.valueOf(actionlist.getFont().getSize()));
+						setComponentSize(String.valueOf(actionlist.getFont().getSize()));
+						System.out.println("name of Font:" + getName());
+						System.out.println("size of font:" + getSize());
 					}
 
 					if (actionlist.getActionName().contains("Layout")) {
@@ -315,8 +400,42 @@ public class Performer implements Runnable {
 						setNumOfCols((actionlist.getLayout().getNumOfCols()));
 
 						for (int j = 0; j < actionlist.getLayout().getRows().size(); j++) {
-							setHeight(actionlist.getLayout().getRows().get(j).getHeight());
-							setWidth(actionlist.getLayout().getRows().get(j).getWidth());
+							if (j == 0) {
+								setTopicHeight((String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
+								setTopicWidth((String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
+								System.out.println("number of rows:" + getNumOfRow());
+								System.out.println("number of cols:" + getNumOfCols());
+								System.out.println("hight of topic:" + getTopicHeight());
+								System.out.println("width of topic:" + getTopicWidth());
+							}
+							if (j == 1) {
+								setAbacusHight((String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
+								setAbacusWidth((String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
+								System.out.println("number of rows:" + getNumOfRow());
+								System.out.println("number of cols:" + getNumOfCols());
+								System.out.println("hight of abacus:" + getAbacusHight());
+								System.out.println("width of abacus:" + getAbacusWidth());
+							}
+							if (j == 2) {
+								setInstructionHight(
+										(String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
+								setInstructionWidth(
+										(String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
+								System.out.println("number of rows:" + getNumOfRow());
+								System.out.println("number of cols:" + getNumOfCols());
+								System.out.println("hight of instruction:" + getInstructionHight());
+								System.out.println("width of instruction:" + getInstructionWidth());
+
+							}
+							if (j == 3) {
+								setActorHight((String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
+								setActorWidth((String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
+								System.out.println("number of rows:" + getNumOfRow());
+								System.out.println("number of cols:" + getNumOfCols());
+								System.out.println("hight of actor:" + getActorHight());
+								System.out.println("width of actor:" + getActorWidth());
+
+							}
 						}
 					}
 					if (actionlist.getActionName().contains("Component")) {
@@ -329,7 +448,15 @@ public class Performer implements Runnable {
 						setName((actionlist.getComponent().getName()));
 						setAlign(actionlist.getComponent().getAlign());
 
-						//setImage((actionlist.getComponent().getImage()));
+						System.out.println("number of rods:" + getNumOfRods());
+						System.out.println("name of component:" + getName());
+
+						System.out.println("alignment of teacher:" + getTeacherAlign());
+						System.out.println("alignment of Student:" + getStudentAlign());
+
+						System.out.println("get align:" + getAlign());
+
+						// setImage((actionlist.getComponent().getImage()));
 					}
 				}
 			}
@@ -354,10 +481,6 @@ public class Performer implements Runnable {
 				String instruction = entry2.getKey();
 				// instructionPanel.performinstruction(instruction, instructionPanel);
 				playRoboticsVoice(instruction);
-
-				// System.out.println("voice " + i);
-				// playText(instruction, i);
-
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
@@ -368,7 +491,6 @@ public class Performer implements Runnable {
 
 				StringBuffer actBuf = new StringBuffer();
 				for (Action action : listOfActions) {
-					// System.out.println(listOfActions);
 					if (action.getActionName().contains("HighlightFrame")) {
 						// abacusPanel.highlightFrame();
 						try {
@@ -424,6 +546,7 @@ public class Performer implements Runnable {
 	public void run() {
 		try {
 			start_beforInstructing();
+			start_instructing();
 		} catch (AbacusException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

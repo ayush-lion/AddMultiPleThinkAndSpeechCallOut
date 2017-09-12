@@ -243,7 +243,7 @@ public class AbacusPanel extends JPanel {
 		if(getAbacus().canWeDisplayFrame()) {
 			getAbacus().getFrame().highlight(g);
 		}
-	}
+	} 
 	
 	/**
 	 * Method is responsible to highlight rods

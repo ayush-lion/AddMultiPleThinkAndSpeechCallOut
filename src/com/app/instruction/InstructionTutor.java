@@ -47,21 +47,21 @@ public class InstructionTutor {
 			g.setColor(Color.BLACK);
 			if(count<=6) 
 			{
-			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/5);    
+			g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight()/4);    
 			}
-			else if(count>6)
+			else if(count>=12)
 			{
-			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/4);    
+			g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight()/2);    
 			}
 			else if(count>=18)
 			{
-		    g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/3);   
+		    g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight()/2);   
 			}
 			else 
 			{
-			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/2); 	
+			g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight()/1); 	
 			}
-			drawString(g, sb, getPosX() + 5, getPosY()+50);
+			drawString(g, sb, getPosX() + 5, getPosY()+60);
 		} else {
 			//g.setColor(Color.TRANSLUCENT);
 			g.setColor(Color.WHITE);
@@ -93,15 +93,15 @@ public class InstructionTutor {
 			g.setColor(Color.BLACK);
 			if(count<=6) 
 			{
-			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/5);    
+			g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight()/5);    
 			}
 			else if(count>6)
 			{
-			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/4);    
+			g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight()/4);    
 			}
 			else if(count>=18)
 			{
-		    g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/3);   
+		    g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight()/3);   
 			}
 			else 
 			{

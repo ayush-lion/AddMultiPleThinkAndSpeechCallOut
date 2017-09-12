@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -130,17 +131,25 @@ public class TestAbacusComponent extends JFrame {
 				try {
 					int rodNum = Integer.valueOf(bUpRod.getText());
 					int beadNum = Integer.valueOf(bUpBead.getText());
-					if(beadNum == 5) 
-						panel.moveHeavenBeadUp(rodNum, Finger.LEFT_INDEX);
-					else
-						panel.moveEarthBeadUp(rodNum, beadNum, Finger.LEFT_THUMB);
+					if(beadNum > 9) {
+						int[] beads = new int[2];
+						beads[0] = Integer.valueOf("" + bUpBead.getText().charAt(0));
+						beads[1] = Integer.valueOf("" + bUpBead.getText().charAt(1));
+						if(beads[0] == 5)
+							panel.moveBeadUpTogether(rodNum, beads, Finger.LEFT_INDEX, Finger.LEFT_THUMB);
+						else if(beads[1] == 5)
+							panel.moveBeadUpTogether(rodNum, beads, Finger.LEFT_THUMB, Finger.LEFT_INDEX);
+					} else {
+						if(beadNum == 5) 
+							panel.moveHeavenBeadUp(rodNum, Finger.LEFT_INDEX);
+						else
+							panel.moveEarthBeadUp(rodNum, beadNum, Finger.LEFT_THUMB);
+					}
 				} catch (AbacusException ae) {
 					if(ae instanceof AbacusException)
-						JOptionPane.showMessageDialog(null, ((AbacusException)ae).getCustomizedMessage(), "InfoBox: Abacus Learning",
-						JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, ((AbacusException)ae).getCustomizedMessage(), "InfoBox: Abacus Learning", JOptionPane.INFORMATION_MESSAGE);
 					else
-						JOptionPane.showMessageDialog(null, ae.getMessage(), "InfoBox: Abacus Learning",
-						JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, ae.getMessage(), "InfoBox: Abacus Learning", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -154,17 +163,25 @@ public class TestAbacusComponent extends JFrame {
 				try {
 					int rodNum = Integer.valueOf(bDownRod.getText());
 					int beadNum = Integer.valueOf(bDownBead.getText());
-					if(beadNum == 5) 
-						panel.moveHeavenBeadDown(rodNum, Finger.RIGHT_THUMB);
-					else
-						panel.moveEarthBeadDown(rodNum, beadNum, Finger.RIGHT_INDEX);
+					if(beadNum > 9) {
+						int[] beads = new int[2];
+						beads[0] = Integer.valueOf("" + bDownBead.getText().charAt(0));
+						beads[1] = Integer.valueOf("" + bDownBead.getText().charAt(1));
+						if(beads[0] == 5)
+							panel.moveBeadDownTogether(rodNum, beads, Finger.RIGHT_INDEX, Finger.RIGHT_THUMB);
+						else if(beads[1] == 5)
+							panel.moveBeadDownTogether(rodNum, beads, Finger.RIGHT_THUMB, Finger.RIGHT_INDEX);
+					} else {
+						if(beadNum == 5) 
+							panel.moveHeavenBeadDown(rodNum, Finger.RIGHT_THUMB);
+						else
+							panel.moveEarthBeadDown(rodNum, beadNum, Finger.RIGHT_INDEX);
+					}
 				} catch (Exception ae) {
 					if(ae instanceof AbacusException)
-						JOptionPane.showMessageDialog(null, ((AbacusException)ae).getCustomizedMessage(), "InfoBox: Abacus Learning", 
-						JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, ((AbacusException)ae).getCustomizedMessage(), "InfoBox: Abacus Learning", JOptionPane.INFORMATION_MESSAGE);
 					else
-						JOptionPane.showMessageDialog(null, ae.getMessage(), "InfoBox: Abacus Learning",
-						JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, ae.getMessage(), "InfoBox: Abacus Learning", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -472,6 +489,8 @@ public class TestAbacusComponent extends JFrame {
 		   public void run() {
 			   ob.showPanel();
 		   }
-		});	
+		});
+		
 	}
+
 }

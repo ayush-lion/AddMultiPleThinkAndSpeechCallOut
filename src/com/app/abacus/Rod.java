@@ -15,11 +15,15 @@ public class Rod {
 
 	private int posX;
 	private int posY;
+	private int nPosX;
+	private int nPosY;
+	private int number;
 	private int width;
 	private int height;
 	private int rodWidth;
 	private Image image;
 	private boolean switchable;
+	private boolean displayNumbers;
 	private boolean doWeNeedToDisplayRodNumbers;
 	
 	public Rod() {}
@@ -34,7 +38,12 @@ public class Rod {
 	
 	public void drawRod(Graphics g) {
 		if(!isSwitchable())
-		g.drawImage(image, this.posX, this.posY, this.getWidth(), this.getHeight(), null);
+			g.drawImage(image, this.posX, this.posY, this.getWidth(), this.getHeight(), null);
+		
+		if(isDisplayNumbers()) {
+			g.setColor(Color.CYAN);
+			g.drawString(String.valueOf(number), nPosX, nPosY);
+		}
 	}
 	
 	public void highlight(Graphics g) {
@@ -144,5 +153,60 @@ public class Rod {
 	public void setSwitchable(boolean switchable) {
 		this.switchable = switchable;
 	}
-	
+
+	/**
+	 * @return the nPosX
+	 */
+	public int getnPosX() {
+		return nPosX;
+	}
+
+	/**
+	 * @param nPosX the nPosX to set
+	 */
+	public void setnPosX(int nPosX) {
+		this.nPosX = nPosX;
+	}
+
+	/**
+	 * @return the nPosY
+	 */
+	public int getnPosY() {
+		return nPosY;
+	}
+
+	/**
+	 * @param nPosY the nPosY to set
+	 */
+	public void setnPosY(int nPosY) {
+		this.nPosY = nPosY;
+	}
+
+	/**
+	 * @return the displayNumbers
+	 */
+	public boolean isDisplayNumbers() {
+		return displayNumbers;
+	}
+
+	/**
+	 * @param displayNumbers the displayNumbers to set
+	 */
+	public void setDisplayNumbers(boolean displayNumbers) {
+		this.displayNumbers = displayNumbers;
+	}
+
+	/**
+	 * @return the number
+	 */
+	public int getNumber() {
+		return number;
+	}
+
+	/**
+	 * @param number the number to set
+	 */
+	public void setNumber(int number) {
+		this.number = number;
+	}
 }

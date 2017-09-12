@@ -37,10 +37,12 @@ public class AbacusPanel extends JPanel {
 	private boolean doWeNeedToHighlightUpperBeads = Boolean.FALSE;
 	private boolean doWeNeedToHighlightSpecificBeads = Boolean.FALSE;
 	private boolean doWeNeedToHighlightDivider = Boolean.FALSE;
+	private boolean doWeNeedToDisplayCount = Boolean.FALSE;
 	
 	private String abacusAttributesFileName = null;
 	private int rodNumber;
 	private int beadNumber;
+	private String displayCount;
 	private BlinkBead bBlink = null;
 	private BlinkRod rBlink = null;
 	private BlinkFrame fBlink = null;
@@ -61,6 +63,7 @@ public class AbacusPanel extends JPanel {
 		} else {
 			abacus = new Abacus(this);
 		}
+		
 		this.repaint();
 	}
 	
@@ -89,6 +92,38 @@ public class AbacusPanel extends JPanel {
 	}
 	
 	/**
+	 * Method is responsible to move bead up together
+	 */
+	public void moveBeadUpTogether(int rodNum, int[] beadNum, String bead1finger, String bead2Finger) throws AbacusException {
+		getAbacus().getLogger().logDebug("Inside moveBeadUpTogether....");
+		
+		//Display Finger
+		displayFingerTogether(rodNum, beadNum[0], beadNum[1], bead1finger, bead2Finger);
+		
+		// Move Earth Bead Up
+		getAbacus().getLogger().logDebug("Move the Bead Up Together....");
+		SwingUtilities.invokeLater(new Runnable() {
+		   public void run() {
+		      try {
+		    	 if(beadNum[0] == 5)
+		    		 getAbacus().moveHeavenBeadToUp(rodNum);
+		    	 else
+		    		 getAbacus().moveEarthBeadToUp(rodNum, beadNum[0]);
+		    	 
+		    	 if(beadNum[1] == 5)
+		    		 getAbacus().moveHeavenBeadToUp(rodNum);
+		    	 else 
+		    		 getAbacus().moveEarthBeadToUp(rodNum, beadNum[1]);
+		      } catch ( Exception e ) {}
+		      getCurrentInstance().repaint();
+		   }
+		});
+		
+		// Hide Finger
+		hideFingerTogether(rodNum, beadNum[0], beadNum[1], bead1finger, bead2Finger);
+	}
+	
+	/**
 	 * Method is responsible to move Earth bead down
 	 */
 	public void moveEarthBeadDown(int rodNum, int beadNum, String finger) throws AbacusException {
@@ -113,6 +148,38 @@ public class AbacusPanel extends JPanel {
 	}
 	
 	/**
+	 * Method is responsible to move bead up together
+	 */
+	public void moveBeadDownTogether(int rodNum, int[] beadNum, String bead1finger, String bead2Finger) throws AbacusException {
+		getAbacus().getLogger().logDebug("Inside moveBeadDownTogether....");
+		
+		//Display Finger
+		displayFingerTogether(rodNum, beadNum[0], beadNum[1], bead1finger, bead2Finger);
+		
+		// Move Earth Bead Up
+		getAbacus().getLogger().logDebug("Move the Bead Down Together....");
+		SwingUtilities.invokeLater(new Runnable() {
+		   public void run() {
+		      try {
+		    	 if(beadNum[0] == 5)
+		    		 getAbacus().moveHeavenBeadToDown(rodNum);
+		    	 else
+		    		 getAbacus().moveEarthBeadToDown(rodNum, beadNum[0]);
+		    	 
+		    	 if(beadNum[1] == 5)
+		    		 getAbacus().moveHeavenBeadToDown(rodNum);
+		    	 else 
+		    		 getAbacus().moveEarthBeadToDown(rodNum, beadNum[1]);
+		      } catch ( Exception e ) {}
+		      getCurrentInstance().repaint();
+		   }
+		});
+		
+		// Hide Finger
+		hideFingerTogether(rodNum, beadNum[0], beadNum[1], bead1finger, bead2Finger);
+	}
+	
+	/**
 	 * Method is responsible to heaven bead up
 	 */
 	public void moveHeavenBeadUp(int rodNum, String finger) throws AbacusException {
@@ -131,6 +198,7 @@ public class AbacusPanel extends JPanel {
 		      getCurrentInstance().repaint();
 		   }
 		});
+		
 		// Hide Finger
 		hideFinger(rodNum, 5, finger);
 	}
@@ -155,6 +223,7 @@ public class AbacusPanel extends JPanel {
 		      getCurrentInstance().repaint();
 		   }
 		});
+		
 		// Hide Finger
 		hideFinger(rodNum, 5, finger);
 	}
@@ -201,6 +270,7 @@ public class AbacusPanel extends JPanel {
 		this.rodNumber = rodNum;
 		this.repaint();
 	}
+	
 	/**
 	 * Method is responsible to hightlight Specific Rod
 	 */
@@ -230,6 +300,7 @@ public class AbacusPanel extends JPanel {
 		}
 	}
 	
+	
 	/**
 	 * Method is responsible to highlight Upper Beads
 	 */
@@ -246,7 +317,8 @@ public class AbacusPanel extends JPanel {
 			getAbacus().getBeads()[i][4].highlight(g);
 		}
 	}
-
+	
+	
 	/**
 	 * Method is responsible to highlight rods
 	 */
@@ -317,7 +389,7 @@ public class AbacusPanel extends JPanel {
 	 */
 	public void hideFingers(boolean isOnorOff) {
 		resetAllBooleans();
-		getAbacus().setDoWeNeedToDisplayFingers(isOnorOff);
+		//getAbacus().setDoWeNeedToDisplayFingers(isOnorOff);
 		this.repaint();
 	}
 	
@@ -439,6 +511,9 @@ public class AbacusPanel extends JPanel {
 			case "doWeNeedToHighlightDivider" :
 				doWeNeedToHighlightDivider = Boolean.TRUE;
 				break;
+			case "doWeNeedToDisplayCount" :
+				doWeNeedToDisplayCount = Boolean.TRUE;
+				break;
 		}
 	}
 	
@@ -454,6 +529,7 @@ public class AbacusPanel extends JPanel {
 		doWeNeedToHighlightSpecificBeads = Boolean.FALSE;
 		doWeNeedToHighlightSpecificRods = Boolean.FALSE;
 		doWeNeedToHighlightDivider = Boolean.FALSE;
+		doWeNeedToDisplayCount = Boolean.FALSE;
 		if(bBlink != null) {
 			bBlink.stopBlink();
 			bBlink = null;
@@ -506,6 +582,28 @@ public class AbacusPanel extends JPanel {
 	}
 	
 	/**
+	 * Method is responsible to display Finger together On Abacus
+	 */
+	private void displayFingerTogether(int rodNum, int bead1, int bead2, String bead1Finger, String bead2Finger) throws AbacusException {
+		// Display Finger
+		if(getAbacus().canWeNeedToDisplayFingers()) {
+			getAbacus().getLogger().logDebug("Display Finger....");
+			getAbacus().displayFinger(rodNum, bead1, true, bead1Finger);
+			getAbacus().displayFinger(rodNum, bead2, true, bead2Finger);
+			this.repaint();
+			
+			// Adding little delay
+			SwingUtilities.invokeLater(new Runnable() {
+			   public void run() {
+			      try {
+				     Thread.sleep(500);
+				  } catch (Exception e) {}
+			   }
+			});
+		}
+	}
+	
+	/**
 	 * Method is responsible to hide the finger on Abacus
 	 */
 	private void hideFinger(int rodNum, int beadNum, String finger) throws AbacusException {
@@ -522,6 +620,43 @@ public class AbacusPanel extends JPanel {
 	        time.start();
 	        time.setRepeats(false);
         }
+	}
+	
+	/**
+	 * Method is responsible to hide the finger on Abacus
+	 */
+	private void hideFingerTogether(int rodNum, int bead1, int bead2, String bead1Finger, String bead2Finger) throws AbacusException {
+		ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+            	try {
+					 getAbacus().displayFinger(rodNum, bead1, false, bead1Finger);
+					 getAbacus().displayFinger(rodNum, bead2, false, bead2Finger);
+			      } catch ( Exception e ) {}
+			      getCurrentInstance().repaint();
+            }
+        };
+        if(getAbacus().canWeNeedToDisplayFingers()) {
+	        Timer time = new Timer(1000, taskPerformer);
+	        time.start();
+	        time.setRepeats(false);
+        }
+	}
+	
+	/**
+	 * Method is responsible to display count on Abacus
+	 */
+	public void displayCount(String count) {
+		switchBoolean("doWeNeedToDisplayCount");
+		displayCount = count;
+		this.repaint();
+	}
+	
+	/**
+	 * Method is responsible to display count on Abacus
+	 */
+	private void displayCount(Graphics g) {
+		getAbacus().getFrame().setNumber(displayCount);
+		getAbacus().getFrame().drawCount(g);
 	}
 	
 	@Override
@@ -568,6 +703,11 @@ public class AbacusPanel extends JPanel {
 		// Highlight divider
 		if(doWeNeedToHighlightDivider) {
 			highlightDivider(g);
+		}
+		
+		//Draw Count
+		if(doWeNeedToDisplayCount) {
+			displayCount(g);
 		}
 		
 	}

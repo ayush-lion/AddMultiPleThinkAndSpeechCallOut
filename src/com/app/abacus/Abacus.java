@@ -3,6 +3,7 @@
  */
 package com.app.abacus;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -32,9 +33,7 @@ public class Abacus extends AbstractAbacus {
 	private boolean isPropertiesProvided;
 	
 	/* Holds Abacus Commands */
-	private String[] commands = { "AddRod", "MinusRod", "Wait", "HighlightFrame", 
-			"HighlightRods", "HighlightBeam", "HighlightLowerBeads", "HighlightUpperBeads", 
-			"HighlightDots", "Reset", "Display" };
+	private String[] commands = { "AddRod", "MinusRod", "Wait", "HighlightFrame", "HighlightRods", "HighlightBeam", "HighlightLowerBeads", "HighlightUpperBeads", "HighlightDots", "Reset", "Display" };
 	
 	/* Holds boolean values */
 	private boolean doWeNeedToDisplayFingers;
@@ -282,20 +281,22 @@ public class Abacus extends AbstractAbacus {
 		
 		/* Draw Rods */
 		int minusFrameWidth = frame.getFrameVerticalWidth();
-		if(!canWeDisplayFrame()) 
-		{
+		if(!canWeDisplayFrame()) {
 			minusFrameWidth = 0;
 		}
 		int rodSpace = (panel.getWidth() - minusFrameWidth) / (getNumOfRods() + 1);
 		getLogger().logDebug("initializeRods Total Width ==> " + panel.getWidth() + " :: Caclulated Rod Space ==> " + rodSpace);
 		
 		rods = new Rod[numOfRods];
-		for(int i=0; i< numOfRods; i++) 
-		{
+		for(int i=0; i< numOfRods; i++) {
 			rods[i] = new Rod();
 			rods[i].setImage(rodImagePath);
 			rods[i].setPosX(frame.getFrameVerticalWidth() + ((i + 1) * rodSpace));
 			rods[i].setPosY(frame.getFrameHorizontalWidth());
+			rods[i].setNumber(getNumOfRods() - i);
+			rods[i].setnPosX(frame.getFrameVerticalWidth() + ((i + 1) * rodSpace));
+			rods[i].setnPosY(panel.getHeight() - 3);
+			rods[i].setDisplayNumbers(Boolean.TRUE);
 			rods[i].setWidth(10);
 			rods[i].setHeight(panel.getHeight() - (frame.getFrameHorizontalWidth() * 2));
 			rods[i].setDoWeNeedToDisplayRodNumbers(doWeNeedToDisplayRodNumbers.booleanValue());
@@ -310,7 +311,7 @@ public class Abacus extends AbstractAbacus {
 		beam = new Beam();
 		beam.setImage(getImage(attributes.get("rodDividerImagePath")));
 		beam.setPosX(0);
-		beam.setPosY(panel.getHeight() / 4); 
+		beam.setPosY(panel.getHeight() / 5);
 		beam.setWidth(panel.getWidth());
 		beam.setHeight(rods[0].getRodWidth());
 	}
@@ -332,16 +333,13 @@ public class Abacus extends AbstractAbacus {
 		Integer beadHeight = attributes.get("beadHeight") != null
 								? Integer.valueOf(attributes.get("beadHeight")) : Abacus.DEFAULT_BEAD_HEIGHT;
 		int minusFrameWidth = frame.getFrameVerticalWidth();
-		
 		if(!canWeDisplayFrame()) {
 			minusFrameWidth = 0;
 		}
-		
 		int rodSpace = (panel.getWidth() - minusFrameWidth) / (getNumOfRods() + 1);
 								
 								
 		/* Setting up beads */
-		
 		beads = new Bead[numOfRods][5];
 		for (int i = 0; i < numOfRods; i++) {
 			for (int j = 0; j < 5; j++) {
@@ -376,7 +374,6 @@ public class Abacus extends AbstractAbacus {
 	/**
 	 * Method is responsible to create the image
 	 */
-	
 	private Image getImage(String fileName) throws IOException {
 		Image image = null;
 		if(!isPropertiesProvided) {
@@ -456,8 +453,8 @@ public class Abacus extends AbstractAbacus {
 	/**
 	 * @param doWeNeedToDisplayFrame the doWeNeedToDisplayFrame to set
 	 */
-	
 	public void setDoWeNeedToDisplayFrame(boolean doWeNeedToDisplayFrame) {
 		this.doWeNeedToDisplayFrame = doWeNeedToDisplayFrame;
-	}	
+	}
+	
 }

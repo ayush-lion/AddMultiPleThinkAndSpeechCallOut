@@ -119,7 +119,6 @@ public class TestCompilerFrame extends JFrame {
 			}
 		});
 		
-        
         this.setVisible(true);
 	}
 	

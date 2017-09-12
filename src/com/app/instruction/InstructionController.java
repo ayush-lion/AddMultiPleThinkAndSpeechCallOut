@@ -43,7 +43,7 @@ public class InstructionController {
 		actor_Student = new ActorStudent();
 		instruction_Student = new InstructionStudent();
 		instruction_Tutor = new InstructionTutor();
-
+		
 		// isProvided = true;
 		// this.Initialize_Attributes(filename);
 	}
@@ -71,7 +71,6 @@ public class InstructionController {
 		setTutor_thinking(getImage(attributes.get("tutor_thinking")));
 		Initialize_Actors(getTutor_image(), getStudent_image());
 		Initialize_Instructions(getTutor_text(), getStudent_text(), getTutor_ins(), getStudent_ins());
-
 	}
 
 	public void DrawInstructionPanel(Graphics g) {

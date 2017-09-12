@@ -1,7 +1,6 @@
 package com.app.integrated.main;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -19,6 +18,17 @@ public class Performer implements Runnable {
 
 	LinkedHashMap<String, HashMap<String, List<Action>>> data;
 
+	private String align;
+	private String teacherAlign;
+	private String studentAlign;
+	private String numOfRods;
+	private String width;
+	private String height;
+	private String name;
+	private String size;
+	private int numOfRow;
+	private int numOfCols;
+
 	private Thread readerThread;
 	InstructionPanel instructionPanel;
 	AbacusPanel abacusPanel;
@@ -31,8 +41,82 @@ public class Performer implements Runnable {
 	/**
 	 * @return the isPlayRobotics
 	 */
+	
+	private String image;
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 	public boolean isPlayRobotics() {
 		return isPlayRobotics;
+	}
+
+	public String getAlign() {
+		return align;
+	}
+
+	public void setAlign(String align) {
+		this.align = align;
+	}
+
+	public String getTeacherAlign() {
+		return teacherAlign;
+	}
+
+	public void setTeacherAlign(String teacherAlign) {
+		this.teacherAlign = teacherAlign;
+	}
+
+	public String getStudentAlign() {
+		return studentAlign;
+	}
+
+	public void setStudentAlign(String studentAlign) {
+		this.studentAlign = studentAlign;
+	}
+
+	public String getNumOfRods() {
+		return numOfRods;
+	}
+
+	public void setNumOfRods(String numOfRods) {
+		this.numOfRods = numOfRods;
+	}
+
+	public String getWidth() {
+		return width;
+	}
+
+	public void setWidth(String width) {
+		this.width = width;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
 	}
 
 	/**
@@ -65,6 +149,22 @@ public class Performer implements Runnable {
 		isPlayRobotics = false;
 		isPlayNatural = false;
 
+	}
+
+	public int getNumOfRow() {
+		return numOfRow;
+	}
+
+	public void setNumOfRow(int numOfRow) {
+		this.numOfRow = numOfRow;
+	}
+
+	public int getNumOfCols() {
+		return numOfCols;
+	}
+
+	public void setNumOfCols(int numOfCols) {
+		this.numOfCols = numOfCols;
 	}
 
 	/**
@@ -200,65 +300,47 @@ public class Performer implements Runnable {
 			for (Entry<String, List<Action>> entry2 : sEntry) {
 				i++;
 				String instruction = entry2.getKey();
-				instructionPanel.performinstruction(instruction, instructionPanel);
+				// instructionPanel.performinstruction(instruction, instructionPanel);
 				playRoboticsVoice(instruction);
-				try {
-					Thread.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
 				List<Action> listOfActions = entry2.getValue();
-			
-				for (Action  actionlist: listOfActions) {
-					
-					if(actionlist.getActionName().equals("Font"))
-					{
-						actionlist.getFont();
-						actionMap.put("	Font Name", actionlist.getFont().getName());
-						actionMap.put("Font Size", actionlist.getFont().getSize());
+				for (Action actionlist : listOfActions) {
+
+					if (actionlist.getActionName().contains("Font")) {
+						setName(String.valueOf(actionlist.getFont().getName()));
+						setSize(String.valueOf(actionlist.getFont().getSize()));
 					}
-					
-					if(actionlist.getActionName().equals("Layout")) 
-					{
-						actionlist.getLayout();
-						actionMap.put("NumOfRows", String.valueOf(actionlist.getLayout().getNumOfRow()));
-						actionMap.put("NumOfCols", String.valueOf(actionlist.getLayout().getNumOfCols()));
-						
-						actionlist.getLayout().getRows();
-						for (int j = 0; j < actionlist.getLayout().getRows().size(); j++)
-						{
-						actionMap.put("row"+j+"Height", actionlist.getLayout().getRows().get(j).getHeight());	
-						actionMap.put("row"+j+"Weight", actionlist.getLayout().getRows().get(j).getWidth());
-						}				
+
+					if (actionlist.getActionName().contains("Layout")) {
+						setNumOfRow((actionlist.getLayout().getNumOfRow()));
+						setNumOfCols((actionlist.getLayout().getNumOfCols()));
+
+						for (int j = 0; j < actionlist.getLayout().getRows().size(); j++) {
+							setHeight(actionlist.getLayout().getRows().get(j).getHeight());
+							setWidth(actionlist.getLayout().getRows().get(j).getWidth());
+						}
 					}
-	
-					if(actionlist.getActionName().equals("Component")) 
-					{
-						actionlist.getComponent();
-						actionMap.put("RodNumber", actionlist.getComponent().getNumOfRods());
-						actionMap.put("Component Name",actionlist.getComponent().getName());
-						
-						actionMap.put("Component Name",actionlist.getComponent().getName());
-						actionMap.put("Teacher Align", actionlist.getComponent().getTeacherAlign());
-						actionMap.put("Student Align", actionlist.getComponent().getStudentAlign());
-						
-						actionMap.put("Component Name", actionlist.getComponent().getName());
-						actionMap.put("Align", actionlist.getComponent().getAlign());
-						
-						actionMap.put("Component Name", actionlist.getComponent().getImage());
+					if (actionlist.getActionName().contains("Component")) {
+						setNumOfRods((actionlist.getComponent().getNumOfRods()));
+						setName((actionlist.getComponent().getName()));
+
+						setTeacherAlign((actionlist.getComponent().getTeacherAlign()));
+						setStudentAlign((actionlist.getComponent().getStudentAlign()));
+
+						setName((actionlist.getComponent().getName()));
+						setAlign(actionlist.getComponent().getAlign());
+
+						//setImage((actionlist.getComponent().getImage()));
 					}
-				}		
+				}
 			}
 		}
-		System.out.println("data fileeeeddddd"+actionMap);
 	}
 
 	/** start instructions */
 
 	public void start_instructing() throws AbacusException {
 		Set<Entry<String, HashMap<String, List<Action>>>> entrySet = data.entrySet();
-		int i = 0;					
+		int i = 0;
 		for (Entry<String, HashMap<String, List<Action>>> entry : entrySet) {
 			Object[] tableRow = new Object[10];
 			String key = entry.getKey();
@@ -270,7 +352,7 @@ public class Performer implements Runnable {
 			for (Entry<String, List<Action>> entry2 : sEntry) {
 				i++;
 				String instruction = entry2.getKey();
-				instructionPanel.performinstruction(instruction, instructionPanel);
+				// instructionPanel.performinstruction(instruction, instructionPanel);
 				playRoboticsVoice(instruction);
 
 				// System.out.println("voice " + i);
@@ -283,13 +365,12 @@ public class Performer implements Runnable {
 				}
 
 				List<Action> listOfActions = entry2.getValue();
-			
-				
-				StringBuffer actBuf = new StringBuffer();	
+
+				StringBuffer actBuf = new StringBuffer();
 				for (Action action : listOfActions) {
-					//System.out.println(listOfActions);
+					// System.out.println(listOfActions);
 					if (action.getActionName().contains("HighlightFrame")) {
-						abacusPanel.highlightFrame();
+						// abacusPanel.highlightFrame();
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException e) {
@@ -297,7 +378,7 @@ public class Performer implements Runnable {
 						}
 
 					} else if (action.getActionName().contains("HighlightRods")) {
-						abacusPanel.highlightRods();
+						// abacusPanel.highlightRods();
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException e) {
@@ -305,7 +386,7 @@ public class Performer implements Runnable {
 						}
 
 					} else if (action.getActionName().contains("HighlightBeam")) {
-						abacusPanel.highlightLowerBeads();
+						// abacusPanel.highlightLowerBeads();
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException e) {
@@ -313,7 +394,8 @@ public class Performer implements Runnable {
 						}
 
 					} else if (action.getActionName().contains("AddRod")) {
-						abacusPanel.moveEarthBeadUp(action.getRodNumber(), action.getBeadNumber(), action.getFinger());
+						// abacusPanel.moveEarthBeadUp(action.getRodNumber(), action.getBeadNumber(),
+						// action.getFinger());
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException e) {
@@ -321,8 +403,8 @@ public class Performer implements Runnable {
 						}
 
 					} else if (action.getActionName().contains("MinusRod")) {
-						abacusPanel.moveEarthBeadDown(action.getRodNumber(), action.getBeadNumber(),
-								action.getFinger());
+						// abacusPanel.moveEarthBeadDown(action.getRodNumber(),
+						// action.getBeadNumber(),action.getFinger());
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException e) {

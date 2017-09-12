@@ -1,10 +1,10 @@
 package com.app.instruction.panel;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -12,12 +12,10 @@ import javax.swing.JPanel;
 
 import com.app.instruction.InstructionController;
 
-import java.awt.Color;
-
-public class InstructionPanel extends JPanel 
-{
-	HashMap<String,String> initial_provider = new  HashMap<String,String>();
+public class InstructionPanel extends JPanel {
 	
+	HashMap<String, String> initial_provider = new HashMap<String, String>();
+
 	InstructionController controller;
 	Image tutor_image;
 	Image student_image;
@@ -29,94 +27,92 @@ public class InstructionPanel extends JPanel
 	boolean isstudentthinking = false;
 	boolean istutorthinking = false;
 	private String attributespath;
-	
-	//boolean isthinkingstudent = false;
-	
-	String[] listOfHtmlChars = {"<B>","</B>","<b>","</b>","<U>","</U>","<u>","</u>","<I>","</I>","<i>","</i>",
-			"<font color=\"red\">","<font color=\"cyan\">","</font>"};
-	
-	public InstructionPanel() throws Throwable
-	{
-		setBackground(Color.WHITE);
-		if(getAttributespath()!=null)
-		{
+
+	// boolean isthinkingstudent = false;
+
+	String[] listOfHtmlChars = { "<B>", "</B>", "<b>", "</b>", "<U>", "</U>", "<u>", "</u>", "<I>", "</I>", "<i>",
+			"</i>", "<font color=\"red\">", "<font color=\"cyan\">", "</font>" };
+
+	public InstructionPanel() throws Throwable {
+		setBackground(Color.BLUE);
+		if (getAttributespath() != null) {
 			controller = new InstructionController(this, getAttributespath());
-			//this.repaint();
-		}
-		else
-		{
-			controller = new InstructionController(this);	
+			this.repaint();
+		} else {
+			controller = new InstructionController(this);
 		}
 	}
-	
-	public void Initialize_Instruction_Panel(InstructionPanel panel) throws IOException
-	{	
+
+	public void Initialize_Instruction_Panel(InstructionPanel panel) throws IOException {
 		controller.Initialize_Attributes(getAttributespath());
 		panel.repaint();
 	}
-	
-	public void performinstruction(String text, InstructionPanel panel)
-	{
-		if(text.startsWith("T:"))
-		{	
-			//System.out.println("inside tutor");
-			
+
+	public void performinstruction(String text, InstructionPanel panel) {
+		// System.out.println(""+text);
+		if (text.startsWith("T:")) {
+			System.out.println("inside tutor");
 			String test = text.replace("T:", "");
 			controller.setIstutor_thinking(istutorthinking);
-			controller.TutorInstructing(test.replaceAll("\\<.*?>",""));
+			controller.TutorInstructing(test.replaceAll("\\<.*?>", ""));
 			panel.repaint();
-		}
-		else
-		{
-			//System.out.println("inside student");
-			
+		} else if (text.startsWith("S:")) {
+			System.out.println("inside student");
 			String test = text.replace("S:", "");
-			controller.setStudent_thinking(isstudentthinking);
-			controller.StudentInstructing(test.replaceAll("\\<.*?>",""));
+			controller.setStudent_thinking(false);
+			controller.StudentInstructing(test.replaceAll("\\<.*?>", ""));
+			panel.repaint();
+		} else if (text.startsWith("TT:")) {
+			System.out.println("inside tutor");
+			String test = text.replace("TT:", "");
+			controller.setIstutor_thinking(true);
+			controller.TutorInstructing(test.replaceAll("\\<.*?>", ""));
+			panel.repaint();
+		} else if (text.startsWith("ST:")) {
+			System.out.println("inside Student");
+			String test = text.replace("ST:", "");
+			controller.setStudent_thinking(true);
+			controller.TutorInstructing(test.replaceAll("\\<.*?>", ""));
 			panel.repaint();
 		}
 	}
-	
-	public void MakeTutorSay(String text, InstructionPanel panel)
-	{	
+
+	public void MakeTutorSay(String text, InstructionPanel panel) {
 		controller.TutorThinking(text);
-		panel.repaint();	
+		panel.repaint();
 	}
-	public void MakeStudentSay(String text,InstructionPanel panel)
-	{
+
+	public void MakeStudentSay(String text, InstructionPanel panel) {
 		controller.StudentThinking(text);
 		panel.repaint();
 	}
-	
+
 	private Image getImage(String fileName) throws IOException {
 		Image image = null;
-		if(!isprovided) {
+		if (!isprovided) {
 			image = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream(fileName));
 		} else {
 			image = ImageIO.read(new File(fileName));
 		}
 		return image;
 	}
-	
+
 	private String replaceHTMLCharacters(String instruction) {
-		//System.out.println(instruction);
-		
+		System.out.println(instruction);
 		for (String htmlChar : listOfHtmlChars) {
 			instruction = instruction.replaceAll(htmlChar, "");
 		}
-		
-		//System.out.println(instruction);
-		
+		System.out.println(instruction);
 		return instruction;
 	}
-	
+
 	@Override
 	public void paint(Graphics g) {
-		//super.paint(g);
-		//System.out.println("painted");
+		// super.paint(g);
+		System.out.println("painted");
 		controller.DrawInstructionPanel(g);
 	}
-	
+
 	/**
 	 * @return the attributespath
 	 */
@@ -125,12 +121,13 @@ public class InstructionPanel extends JPanel
 	}
 
 	/**
-	 * @param attributespath the attributespath to set
+	 * @param attributespath
+	 *            the attributespath to set
 	 */
 	public void setAttributespath(String attributespath) {
 		this.attributespath = attributespath;
 	}
-	
+
 	/**
 	 * @return the isstudentthinking
 	 */
@@ -139,7 +136,8 @@ public class InstructionPanel extends JPanel
 	}
 
 	/**
-	 * @param isstudentthinking the isstudentthinking to set
+	 * @param isstudentthinking
+	 *            the isstudentthinking to set
 	 */
 	public void setIsstudentthinking(boolean isstudentthinking) {
 		this.isstudentthinking = isstudentthinking;
@@ -153,7 +151,8 @@ public class InstructionPanel extends JPanel
 	}
 
 	/**
-	 * @param istutorthinking the istutorthinking to set
+	 * @param istutorthinking
+	 *            the istutorthinking to set
 	 */
 	public void setIstutorthinking(boolean istutorthinking) {
 		this.istutorthinking = istutorthinking;

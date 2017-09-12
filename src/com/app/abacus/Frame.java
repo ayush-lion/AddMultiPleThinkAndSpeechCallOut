@@ -17,6 +17,7 @@ public class Frame {
 	private int posY;
 	private int width;
 	private int height;
+	private String number;
 	private int frameVerticalWidth;
 	private int frameHorizontalWidth;
 	private boolean doWeNeedToDisplayTotalCount;
@@ -35,8 +36,22 @@ public class Frame {
 	}
 	
 	public void drawFrame(Graphics g) {
-		if(!isSwitchable())
+		if(!isSwitchable()) {
 			g.drawImage(image, this.posX, this.posY, this.getWidth(), this.getHeight(), null);
+			if(number != null) {
+				g.setColor(Color.CYAN);
+				g.drawString("Count : " + number, this.getWidth() - 200, 10);
+			}
+		}
+	}
+	
+	public void drawCount(Graphics g) {
+		if(!isSwitchable()) {
+			if(number != null) {
+				g.setColor(Color.CYAN);
+				g.drawString("Count : " + number, this.getWidth() - 200, 10);
+			}
+		}
 	}
 	
 	public void highlight(Graphics g) {
@@ -103,6 +118,8 @@ public class Frame {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+
+	
 
 	/**
 	 * @return the image
@@ -172,5 +189,19 @@ public class Frame {
 	 */
 	public void setSwitchable(boolean switchable) {
 		this.switchable = switchable;
+	}
+
+	/**
+	 * @return the number
+	 */
+	public String getNumber() {
+		return number;
+	}
+
+	/**
+	 * @param number the number to set
+	 */
+	public void setNumber(String number) {
+		this.number = number;
 	}
 }

@@ -25,11 +25,52 @@ public class InstructionTutor {
 			g.drawString(line, x, y += g.getFontMetrics().getHeight());
 	}
 
+	/** draw_think of tutor*/
 	
 	public void draw_think(Graphics g)
 	{
+		if (isSwitchable()) {
+			String sb = null;
+			String str = getIns_text();
+			String[] strArray = str.split(" ");
+			StringBuffer sbuf = new StringBuffer();
+
+			for (int i = 0; i < strArray.length; i++) {
+				if (i != 0 && i % 6 == 0) {
+					sbuf.append("\n");
+					count = i;
+				}
+				sbuf.append(strArray[i]).append(" ");
+			}
+			sb = sbuf.toString();
+			g.setFont(g.getFont().deriveFont(12f));
+			g.setColor(Color.BLACK);
+			if(count<=6) 
+			{
+			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/5);    
+			}
+			else if(count>6)
+			{
+			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/4);    
+			}
+			else if(count>=18)
+			{
+		    g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/3);   
+			}
+			else 
+			{
+			g.drawRect(getPosX(), getPosY()+50, getWidth(), getHeight()/2); 	
+			}
+			drawString(g, sb, getPosX() + 5, getPosY()+50);
+		} else {
+			//g.setColor(Color.TRANSLUCENT);
+			g.setColor(Color.WHITE);
+			g.drawRect(getPosX(), getPosY(), getWidth(), getHeight());
+		}
 		
 	}
+	
+	/** draw_instruction of tutor*/
 	
 	public void draw_instruction(Graphics g)
 

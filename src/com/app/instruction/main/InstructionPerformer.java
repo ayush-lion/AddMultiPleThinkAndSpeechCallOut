@@ -164,7 +164,7 @@ public class InstructionPerformer implements Runnable {
 			for (Entry<String, List<Action>> entry2 : sEntry) {
 				i++;
 				String instruction = entry2.getKey();
-				instructionPanel.performinstruction(instruction, instructionPanel);
+			//	instructionPanel.performinstruction(instruction, instructionPanel);
 				
 					playRoboticsVoice(instruction.replace("T:", "").replace("S:", ""));
 					System.out.println("voice "+i);

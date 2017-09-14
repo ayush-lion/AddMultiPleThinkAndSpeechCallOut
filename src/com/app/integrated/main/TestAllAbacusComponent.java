@@ -481,12 +481,17 @@ public class TestAllAbacusComponent extends JFrame {
 				topicPanel.setTopicName(performer.getTopicName());
 				topicPanel.setFontName(performer.getTopicName());
 				topicPanel.setFontSize(Integer.parseInt(performer.getComponentSize()));
-
+				
+				imagePanel.setTutorspeech(performer.getTutorSpeech());
+				imagePanel.setStudentspeech(performer.getStudentSpeech());
+				
+				imagePanel.drawLeftLabel("");
+				imagePanel.drawRightLabel("");
+				
 				topicPanel.repaint();
 				instructionpanel.repaint();
 				abacusPanel.repaint();
-				imagePanel.repaint();
-
+			
 				// TODO Auto-generated method stub
 			}
 		});

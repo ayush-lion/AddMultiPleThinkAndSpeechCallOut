@@ -18,6 +18,9 @@ public class ImagePanel extends JPanel {
 	private ImagePanel imagePanel;
 	private Callout leftlabel, rightlabel;
 	private InstructionStudent instructionStudent;
+	
+	private String tutorspeech="Good morning Students";
+	private String studentspeech="Good morning mam";
 
 	public ImagePanel() {
 
@@ -36,15 +39,31 @@ public class ImagePanel extends JPanel {
 	}
 
 	public void drawLeftLabel(String text) {
-		leftlabel.setText("hello");
-		leftlabel.setText("hurrah Text messaging, or texting, is the act of composing and sending electronic");
+		leftlabel.setText(getTutorspeech());
+		leftlabel.setLocation(getLeftposX(),getLeftposY());
 		this.add(leftlabel);
 	}
 
 	public void drawRightLabel(String text) {
-		rightlabel.setText("yes");
+		rightlabel.setText(getStudentspeech());
 		rightlabel.setLocation(getRightposX(), getRightposY());
 		this.add(rightlabel);
+	}
+	
+	public String getTutorspeech() {
+		return tutorspeech;
+	}
+
+	public void setTutorspeech(String tutorspeech) {
+		this.tutorspeech = tutorspeech;
+	}
+
+	public String getStudentspeech() {
+		return studentspeech;
+	}
+
+	public void setStudentspeech(String studentspeech) {
+		this.studentspeech = studentspeech;
 	}
 
 	public int getLeftposX() {

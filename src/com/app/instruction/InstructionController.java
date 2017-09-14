@@ -15,7 +15,7 @@ import com.app.utils.InstructionAttributeLoader;
 public class InstructionController {
 	ActorStudent actor_Student;
 	ActorTutor actor_Tutor;
-	boolean istutor_thinking = false; 
+	boolean istutor_thinking = false;
 	boolean isStudent_thinking = false;
 
 	InstructionStudent instruction_Student;
@@ -29,7 +29,7 @@ public class InstructionController {
 	public InstructionController(InstructionPanel Panel) throws IOException {
 		this.panel = Panel;
 		actor_Tutor = new ActorTutor();
-		actor_Student = new ActorStudent(); 
+		actor_Student = new ActorStudent();
 		instruction_Student = new InstructionStudent();
 		instruction_Tutor = new InstructionTutor();
 		this.isProvided = false;
@@ -43,7 +43,7 @@ public class InstructionController {
 		actor_Student = new ActorStudent();
 		instruction_Student = new InstructionStudent();
 		instruction_Tutor = new InstructionTutor();
-		
+
 		// isProvided = true;
 		// this.Initialize_Attributes(filename);
 	}
@@ -69,7 +69,7 @@ public class InstructionController {
 		setTutor_text(attributes.get("tutor_text"));
 		setStudent_thinking(getImage(attributes.get("student_thinking")));
 		setTutor_thinking(getImage(attributes.get("tutor_thinking")));
-		
+
 		Initialize_Actors(getTutor_image(), getStudent_image());
 		Initialize_Instructions(getTutor_text(), getStudent_text(), getTutor_ins(), getStudent_ins());
 	}
@@ -151,6 +151,7 @@ public class InstructionController {
 			instruction_Tutor.setIns_text(text.replaceAll("\\<.*?>", ""));
 		}
 	}
+
 	public void TutorThinking(String text) {
 
 	}
@@ -397,16 +398,13 @@ public class InstructionController {
 	}
 
 	public void Draw_Instruction_Tutor(Graphics g) {
-		
-		if(istutor_thinking)
-		{
+
+		if (istutor_thinking) {
+			instruction_Tutor.draw_think(g);
+		} else {
 			instruction_Tutor.draw_instruction(g);
 		}
-		else
-		{
-			instruction_Tutor.draw_think(g);
-		}
-		
+
 	}
 
 	public void Draw_Instruction_Student(Graphics g) {

@@ -32,11 +32,7 @@ public class InstructionTutor {
 		if (isSwitchable()) {
 			String str = getIns_text();
 			ArrayList<String> strings = new ArrayList<>(Arrays.asList(str.split("")));
-			java.util.Iterator<String> iterator = strings.iterator();
-			while (iterator.hasNext()) {
-				String string = (String) iterator.next();
-				System.out.println(string);
-			}
+
 		}
 	}
 

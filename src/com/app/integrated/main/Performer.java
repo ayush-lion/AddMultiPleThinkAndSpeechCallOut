@@ -1,6 +1,9 @@
 package com.app.integrated.main;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -41,6 +44,9 @@ public class Performer implements Runnable {
 	private String componentSize;
 	private int numOfRow;
 	private int numOfCols;
+	
+	private String tutorSpeech;
+	private String StudentSpeech;
 
 	private Thread readerThread;
 	InstructionPanel instructionPanel;
@@ -63,6 +69,22 @@ public class Performer implements Runnable {
 
 	public void setTopicHeight(String topicHeight) {
 		this.topicHeight = topicHeight;
+	}
+
+	public String getTutorSpeech() {
+		return tutorSpeech;
+	}
+
+	public void setTutorSpeech(String tutorSpeech) {
+		this.tutorSpeech = tutorSpeech;
+	}
+
+	public String getStudentSpeech() {
+		return StudentSpeech;
+	}
+
+	public void setStudentSpeech(String studentSpeech) {
+		StudentSpeech = studentSpeech;
 	}
 
 	public String getTopicWidth() {
@@ -393,7 +415,6 @@ public class Performer implements Runnable {
 		int i = 0;
 		HashMap<String, String> actionMap = new HashMap<String, String>();
 		for (Entry<String, HashMap<String, List<Action>>> entry : entrySet) {
-
 			Object[] tableRow = new Object[9];
 			String key = entry.getKey();
 			tableRow[0] = key;
@@ -402,11 +423,29 @@ public class Performer implements Runnable {
 			for (Entry<String, List<Action>> entry2 : sEntry) {
 				i++;
 				String instruction = entry2.getKey();
-				if (instruction.contains("Learning")) {
-					String s = instruction.replace("<Topic>", "");
-					String s2 = s.replace("</Topic>", "");
-					setTopicName(s2);
+				
+				ArrayList<String> strings = new ArrayList<>(Arrays.asList(instruction.split("")));
+					if (instruction.contains("Learning")) {
+						String s = instruction.replace("<Topic>", "");
+						String s2 = s.replace("</Topic>", "");
+						setTopicName(s2);
+						System.out.println(s);
+					}
+					else
+				  if(instruction.contains("TS:")) 
+					{
+						String s = instruction.replace("TS:","");
+						setTutorSpeech(s);
+						System.out.print(getTutorSpeech());
+					}
+				  else
+					if(instruction.contains("SS:")) 
+					{
+						String s = instruction.replace("SS:", "");
+						setStudentSpeech(s);
+						System.out.print(getStudentSpeech());
 				}
+				
 				// instructionPanel.performinstruction(instruction, instructionPanel);
 				List<Action> listOfActions = entry2.getValue();
 				for (Action actionlist : listOfActions) {
@@ -414,8 +453,7 @@ public class Performer implements Runnable {
 					if (actionlist.getActionName().contains("Font")) {
 						setName(String.valueOf(actionlist.getFont().getName()));
 						setComponentSize(String.valueOf(actionlist.getFont().getSize()));
-						System.out.println("name of Font:" + getName());
-						System.out.println("size of font:" + getComponentSize());
+
 					}
 
 					if (actionlist.getActionName().contains("Layout")) {
@@ -426,37 +464,23 @@ public class Performer implements Runnable {
 							if (j == 0) {
 								setTopicHeight((String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
 								setTopicWidth((String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
-								System.out.println("number of rows:" + getNumOfRow());
-								System.out.println("number of cols:" + getNumOfCols());
-								System.out.println("hight of topic:" + getTopicHeight());
-								System.out.println("width of topic:" + getTopicWidth());
+
 							}
 							if (j == 1) {
 								setAbacusHight((String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
 								setAbacusWidth((String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
-								System.out.println("number of rows:" + getNumOfRow());
-								System.out.println("number of cols:" + getNumOfCols());
-								System.out.println("hight of abacus:" + getAbacusHight());
-								System.out.println("width of abacus:" + getAbacusWidth());
+
 							}
 							if (j == 2) {
 								setInstructionHight(
 										(String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
 								setInstructionWidth(
 										(String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
-								System.out.println("number of rows:" + getNumOfRow());
-								System.out.println("number of cols:" + getNumOfCols());
-								System.out.println("hight of instruction:" + getInstructionHight());
-								System.out.println("width of instruction:" + getInstructionWidth());
 
 							}
 							if (j == 3) {
 								setActorHight((String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
 								setActorWidth((String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
-								System.out.println("number of rows:" + getNumOfRow());
-								System.out.println("number of cols:" + getNumOfCols());
-								System.out.println("hight of actor:" + getActorHight());
-								System.out.println("width of actor:" + getActorWidth());
 
 							}
 						}

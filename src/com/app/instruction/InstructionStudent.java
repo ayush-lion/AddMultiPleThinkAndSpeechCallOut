@@ -19,7 +19,7 @@ public class InstructionStudent {
 	public InstructionStudent() {
 		// default constructor
 
-	} 
+	}
 
 	private void drawString(Graphics g, String text, int x, int y) {
 		for (String line : text.split("\n"))
@@ -50,45 +50,45 @@ public class InstructionStudent {
 
 			/** check include Student thinking Image */
 
-			//g.drawArc(getPosX() + 170, getPosY() - 115, 90, 150, 45, 360);
-			//g.drawArc(getPosX() + 270, getPosY() - 50, 15, 20, 45, 360);
-			//g.drawArc(getPosX() + 300, getPosY() - 40, 5, 10, 45, 360);
+			// g.drawArc(getPosX() + 170, getPosY() - 115, 90, 150, 45, 360);
+			// g.drawArc(getPosX() + 270, getPosY() - 50, 15, 20, 45, 360);
+			// g.drawArc(getPosX() + 300, getPosY() - 40, 5, 10, 45, 360);
 
 			if (count <= 6) {
 
-				//g.drawArc(getPosX() + 170, getPosY() - 115, 90, 150, 45, 360);
-				//g.drawArc(getPosX() + 270, getPosY() - 50, 15, 20, 45, 360);
-				//g.drawArc(getPosX() + 300, getPosY() - 40, 5, 10, 45, 360);
+				// g.drawArc(getPosX() + 170, getPosY() - 115, 90, 150, 45, 360);
+				// g.drawArc(getPosX() + 270, getPosY() - 50, 15, 20, 45, 360);
+				// g.drawArc(getPosX() + 300, getPosY() - 40, 5, 10, 45, 360);
 
 			} else if (count > 6) {
 
-				//g.drawArc(getPosX() + 170, getPosY() - 115, 90, 150, 45, 360);
-				//g.drawArc(getPosX() + 270, getPosY() - 50, 15, 20, 45, 360);
-				//g.drawArc(getPosX() + 300, getPosY() - 40, 5, 10, 45, 360);
+				// g.drawArc(getPosX() + 170, getPosY() - 115, 90, 150, 45, 360);
+				// g.drawArc(getPosX() + 270, getPosY() - 50, 15, 20, 45, 360);
+				// g.drawArc(getPosX() + 300, getPosY() - 40, 5, 10, 45, 360);
 
 			} else if (count >= 18) {
 
-				//g.drawArc(getPosX() + 170, getPosY() - 115, 90, 150, 45, 360);
-				//g.drawArc(getPosX() + 270, getPosY() - 50, 15, 20, 45, 360);
-				//g.drawArc(getPosX() + 300, getPosY() - 40, 5, 10, 45, 360);
+				// g.drawArc(getPosX() + 170, getPosY() - 115, 90, 150, 45, 360);
+				// g.drawArc(getPosX() + 270, getPosY() - 50, 15, 20, 45, 360);
+				// g.drawArc(getPosX() + 300, getPosY() - 40, 5, 10, 45, 360);
 
 			} else {
 
-				//g.drawArc(getPosX() + 170, getPosY() - 115, 90, 150, 45, 360);
-				//g.drawArc(getPosX() + 270, getPosY() - 50, 15, 20, 45, 360);
-				//g.drawArc(getPosX() + 300, getPosY() - 40, 5, 10, 45, 360);
+				// g.drawArc(getPosX() + 170, getPosY() - 115, 90, 150, 45, 360);
+				// g.drawArc(getPosX() + 270, getPosY() - 50, 15, 20, 45, 360);
+				// g.drawArc(getPosX() + 300, getPosY() - 40, 5, 10, 45, 360);
 
 			}
-			g.setFont(g.getFont().deriveFont(12f));
-			drawString(g, sb, getPosX() + 5, getPosY() + 50);
+			// g.setFont(g.getFont().deriveFont(12f));
+			// drawString(g, sb, getPosX() + 5, getPosY() + 50);
 		}
 
 		else
 
 		{
 			// g.setColor(Color.TRANSLUCENT);
-			g.setColor(Color.WHITE);
-			g.drawRect(getPosX(), getPosY(), getWidth(), getHeight());
+			// g.setColor(Color.WHITE);
+			// g.drawRect(getPosX(), getPosY(), getWidth(), getHeight());
 		}
 	}
 
@@ -101,46 +101,6 @@ public class InstructionStudent {
 			int count = 0;
 			String sb = null;
 			String str = getIns_text();
-			String[] strArray = str.split(" ");
-			StringBuffer sbuf = new StringBuffer();
-
-			for (int i = 0; i < strArray.length; i++) {
-				if (i != 0 && i % 6 == 0) {
-					sbuf.append("\n");
-					// System.out.println(i);
-					count = i;
-				}
-				sbuf.append(strArray[i]).append(" ");
-			}
-			sb = sbuf.toString();
-			// System.out.println(count);
-			g.setColor(Color.BLACK);
-
-			/** check include Student thinking Image */
-
-			// g.drawArc(getPosX()+170, getPosY()-115, 90, 150, 45, 360);
-			// g.drawArc(getPosX()+270, getPosY()-50, 15, 20, 45, 360);
-			// g.drawArc(getPosX()+300, getPosY()-40, 5, 10, 45, 360);
-
-			if (count <= 6) {
-				g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight() / 4);
-			} else if (count >= 12) {
-				g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight() / 2);
-			} else if (count >= 18) {
-				g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight() / 2);
-			} else {
-				g.drawRect(getPosX(), getPosY()+60, getWidth(), getHeight() / 1);
-			}
-			g.setFont(g.getFont().deriveFont(12f));
-			drawString(g, sb, getPosX() + 5, getPosY() + 60);
-		}
-
-		else
-
-		{
-			// g.setColor(Color.TRANSLUCENT);
-			g.setColor(Color.WHITE);
-			g.drawRect(getPosX(), getPosY(), getWidth(), getHeight());
 		}
 	}
 

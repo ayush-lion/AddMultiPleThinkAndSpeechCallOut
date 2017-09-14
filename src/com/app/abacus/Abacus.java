@@ -456,5 +456,4 @@ public class Abacus extends AbstractAbacus {
 	public void setDoWeNeedToDisplayFrame(boolean doWeNeedToDisplayFrame) {
 		this.doWeNeedToDisplayFrame = doWeNeedToDisplayFrame;
 	}
-	
 }

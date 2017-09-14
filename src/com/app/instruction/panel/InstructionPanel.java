@@ -98,11 +98,11 @@ public class InstructionPanel extends JPanel {
 	}
 
 	private String replaceHTMLCharacters(String instruction) {
-		System.out.println(instruction);
+		//System.out.println(instruction);
 		for (String htmlChar : listOfHtmlChars) {
 			instruction = instruction.replaceAll(htmlChar, "");
 		}
-		System.out.println(instruction);
+		//System.out.println(instruction);
 		return instruction;
 	}
 

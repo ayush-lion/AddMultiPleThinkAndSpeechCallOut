@@ -14,13 +14,12 @@ import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 
 public class InstructionPerformer implements Runnable {
-	
+
 	private Thread readerThread;
 	LinkedHashMap<String, HashMap<String, List<Action>>> data;
 	private VoiceManager vm;
 	private Voice voice;
 	private InstructionPanel instructionPanel;
-	
 
 	/**
 	 * @return the readerThread
@@ -29,14 +28,13 @@ public class InstructionPerformer implements Runnable {
 		return readerThread;
 	}
 
-
 	/**
-	 * @param readerThread the readerThread to set
+	 * @param readerThread
+	 *            the readerThread to set
 	 */
 	public void setReaderThread(Thread readerThread) {
 		this.readerThread = readerThread;
 	}
-
 
 	/**
 	 * @return the data
@@ -45,14 +43,13 @@ public class InstructionPerformer implements Runnable {
 		return data;
 	}
 
-
 	/**
-	 * @param data the data to set
+	 * @param data
+	 *            the data to set
 	 */
 	public void setData(LinkedHashMap<String, HashMap<String, List<Action>>> data) {
 		this.data = data;
 	}
-
 
 	/**
 	 * @return the vm
@@ -61,14 +58,13 @@ public class InstructionPerformer implements Runnable {
 		return vm;
 	}
 
-
 	/**
-	 * @param vm the vm to set
+	 * @param vm
+	 *            the vm to set
 	 */
 	public void setVm(VoiceManager vm) {
 		this.vm = vm;
 	}
-
 
 	/**
 	 * @return the voice
@@ -77,14 +73,13 @@ public class InstructionPerformer implements Runnable {
 		return voice;
 	}
 
-
 	/**
-	 * @param voice the voice to set
+	 * @param voice
+	 *            the voice to set
 	 */
 	public void setVoice(Voice voice) {
 		this.voice = voice;
 	}
-
 
 	/**
 	 * @return the instructionPanel
@@ -93,32 +88,28 @@ public class InstructionPerformer implements Runnable {
 		return instructionPanel;
 	}
 
-
 	/**
-	 * @param instructionPanel the instructionPanel to set
+	 * @param instructionPanel
+	 *            the instructionPanel to set
 	 */
 	public void setInstructionPanel(InstructionPanel instructionPanel) {
 		this.instructionPanel = instructionPanel;
 	}
 
-
 	public void startReading() {
 		readerThread = new Thread(this);
 		readerThread.start();
 	}
-	
-	
-	public InstructionPerformer()
-	{
+
+	public InstructionPerformer() {
 		System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
-		//isPlayRobotics = false;
-		//isPlayNatural = false;
-		
+		// isPlayRobotics = false;
+		// isPlayNatural = false;
+
 	}
-	
-	
+
 	private void playRoboticsVoice(String insTxt) {
-		System.out.println(""+insTxt.toString());
+		System.out.println("" + insTxt.toString());
 		String[] txt = insTxt.split("\n");
 		String txtInput = "";
 		for (String data : txt) {
@@ -133,57 +124,60 @@ public class InstructionPerformer implements Runnable {
 			voice.allocate();
 			voice.speak(txtInput);
 			voice.deallocate();
-	    }catch(Exception e){ e.printStackTrace(); }
-		finally {
-			//setDataReadyForRead(false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// setDataReadyForRead(false);
 		}
 	}
-	
+
 	/**
-	 * @param playSound the playSound to set
+	 * @param playSound
+	 *            the playSound to set
 	 */
 
 	public void stopPlayback() {
-		if(readerThread.isAlive()) {
-			readerThread.stop();			
+		if (readerThread.isAlive()) {
+			readerThread.stop();
 		}
 	}
-	
-	public void start_instructing() throws AbacusException
-	{
+
+	public void start_instructing() throws AbacusException {
 		Set<Entry<String, HashMap<String, List<Action>>>> entrySet = data.entrySet();
-		int i=0;
+		int i = 0;
 		for (Entry<String, HashMap<String, List<Action>>> entry : entrySet) {
 			Object[] tableRow = new Object[3];
 			String key = entry.getKey();
 			tableRow[0] = key;
-			
+
 			HashMap<String, List<Action>> map = entry.getValue();
-			Set<Entry<String, List<Action>>> sEntry =  map.entrySet();
-			
+			Set<Entry<String, List<Action>>> sEntry = map.entrySet();
+
 			for (Entry<String, List<Action>> entry2 : sEntry) {
 				i++;
 				String instruction = entry2.getKey();
-			//	instructionPanel.performinstruction(instruction, instructionPanel);
-				
-					playRoboticsVoice(instruction.replace("T:", "").replace("S:", ""));
-					System.out.println("voice "+i);
-					//playText(instruction, i);
+				// instructionPanel.performinstruction(instruction, instructionPanel);
+
+				playRoboticsVoice(instruction.replace("T:", "").replace("S:", ""));
+				System.out.println("voice " + i);
+				// playText(instruction, i);
 				try {
 					Thread.sleep(500);
-									} catch (InterruptedException e) { e.printStackTrace(); }
-				
-				List<Action> listOfActions = entry2.getValue();
-				StringBuffer actBuf = new StringBuffer(); 
-				for (Action action : listOfActions) {
-					
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
-				
+
+				List<Action> listOfActions = entry2.getValue();
+				StringBuffer actBuf = new StringBuffer();
+				for (Action action : listOfActions) {
+
+				}
+
 			}
-			//odel.addRow(tableRow);
+			// odel.addRow(tableRow);
 		}
 	}
-	
+
 	@Override
 	public void run() {
 		try {
@@ -192,6 +186,6 @@ public class InstructionPerformer implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
 	}
 }

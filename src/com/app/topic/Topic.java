@@ -2,12 +2,18 @@ package com.app.topic;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
 
-public class Topic  {
+import com.app.instruction.panel.InstructionPanel;
+import com.app.integrated.main.Performer;
+
+public class Topic {
 
 	private int posX;
 	private int posY;
 	private String text;
+	private Performer performer;
+	private Topic topic;
 
 	public Topic(int posX, int posY, int width, int height) {
 		this.posX = posX;
@@ -17,13 +23,7 @@ public class Topic  {
 	public Topic() {
 		// TODO Auto-generated constructor stub
 	}
- 
-	public void drawTopic(Graphics g) {
 
-		g.setColor(Color.BLACK);
-		g.drawString(getText(), getPosX(), getPosY());
-	}
-	
 	public String getText() {
 		return text;
 	}

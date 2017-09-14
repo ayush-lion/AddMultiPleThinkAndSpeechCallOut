@@ -22,6 +22,8 @@ public class Performer implements Runnable {
 	private String teacherAlign;
 	private String studentAlign;
 	private String numOfRods;
+	private String subjectName;
+	private String topicName;
 
 	private String topicHeight;
 	private String topicWidth;
@@ -85,6 +87,22 @@ public class Performer implements Runnable {
 
 	public void setAbacusWidth(String abacusWidth) {
 		this.abacusWidth = abacusWidth;
+	}
+
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
+	public String getTopicName() {
+		return topicName;
+	}
+
+	public void setTopicName(String topicName) {
+		this.topicName = topicName;
 	}
 
 	public String getActorHight() {
@@ -222,7 +240,7 @@ public class Performer implements Runnable {
 	public int getNumOfRow() {
 		return numOfRow;
 	}
-	
+
 	public void setNumOfRow(int numOfRow) {
 		this.numOfRow = numOfRow;
 	}
@@ -384,6 +402,11 @@ public class Performer implements Runnable {
 			for (Entry<String, List<Action>> entry2 : sEntry) {
 				i++;
 				String instruction = entry2.getKey();
+				if (instruction.contains("Learning")) {
+					String s = instruction.replace("<Topic>", "");
+					String s2 = s.replace("</Topic>", "");
+					setTopicName(s2);
+				}
 				// instructionPanel.performinstruction(instruction, instructionPanel);
 				List<Action> listOfActions = entry2.getValue();
 				for (Action actionlist : listOfActions) {
@@ -392,7 +415,7 @@ public class Performer implements Runnable {
 						setName(String.valueOf(actionlist.getFont().getName()));
 						setComponentSize(String.valueOf(actionlist.getFont().getSize()));
 						System.out.println("name of Font:" + getName());
-						System.out.println("size of font:" + getSize());
+						System.out.println("size of font:" + getComponentSize());
 					}
 
 					if (actionlist.getActionName().contains("Layout")) {
@@ -554,5 +577,4 @@ public class Performer implements Runnable {
 		// TODO Auto-generated method stub
 
 	}
-
 }

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -33,6 +32,8 @@ import javax.swing.table.TableColumn;
 
 import com.app.abacus.Frame;
 import com.app.abacus.panel.AbacusPanel;
+import com.app.callout.Callout;
+import com.app.callout.RightCallout;
 import com.app.imagePanel.ImagePanel;
 import com.app.instruction.panel.InstructionPanel;
 import com.app.instructions.beans.Action;
@@ -51,6 +52,9 @@ public class TestAllAbacusComponent extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	// Top panels
+
+	String txtRed = "This is a <colorred>Callout Demo</colorred>";
+	String txtBlue = "This is a <colorblue>Callout Demo</colorblue>";
 
 	LinkedHashMap<String, HashMap<String, List<Action>>> data;
 
@@ -102,7 +106,7 @@ public class TestAllAbacusComponent extends JFrame {
 	private int mainPanelheight = 700;
 
 	private int topic_width = 100;
-	private int topic_height = 20;
+	private int topic_height = 5;
 
 	private int abacus_width = 100;
 	private int abacus_height = 50;
@@ -111,7 +115,7 @@ public class TestAllAbacusComponent extends JFrame {
 	private int instruction_height = 20;
 
 	private int image_width = 100;
-	private int image_hight = 20;
+	private int image_hight = 10;
 
 	private TopicPanel topicPanel;
 	private AbacusPanel abacusPanel;
@@ -158,13 +162,15 @@ public class TestAllAbacusComponent extends JFrame {
 			instructionpanel = new InstructionPanel();
 			imagePanel = new ImagePanel();
 
+			imagePanel.drawLeftLabel("");
+			imagePanel.drawRightLabel("");
+
 			setBoundsTopic();
 			setBoundsAbacus();
 			setBoundsInstruction();
 			setBoundsImage();
 
 			mainPanel.setLayout(null);
-
 			mainPanel.add(topicPanel);
 			mainPanel.add(abacusPanel);
 			mainPanel.add(instructionpanel);
@@ -237,7 +243,6 @@ public class TestAllAbacusComponent extends JFrame {
 				(getMainPanelheight() * getTopic_height() / 100) + (getMainPanelheight() * getAbacus_height() / 100)
 						+ (getMainPanelheight() * getInstruction_height() / 100),
 				(getMainPanelWidth() * getImage_width() / 100), (getMainPanelheight() * getImage_hight() / 100));
-		imagePanel.setBackground(Color.cyan);
 
 	}
 
@@ -466,18 +471,22 @@ public class TestAllAbacusComponent extends JFrame {
 				setInstruction_width(Integer.parseInt(performer.getInstructionWidth().replace("null", "")));
 
 				setImage_hight(Integer.parseInt(performer.getActorHight().replace("null", "")));
-				setImage_width(Integer.parseInt(performer.getWidth().replace("null", "")));
+				setImage_width(Integer.parseInt(performer.getActorWidth().replace("null", "")));
 
 				setBoundsTopic();
 				setBoundsAbacus();
 				setBoundsInstruction();
 				setBoundsImage();
-				
+
+				topicPanel.setTopicName(performer.getTopicName());
+				topicPanel.setFontName(performer.getTopicName());
+				topicPanel.setFontSize(Integer.parseInt(performer.getComponentSize()));
+
 				topicPanel.repaint();
 				instructionpanel.repaint();
 				abacusPanel.repaint();
 				imagePanel.repaint();
-				
+
 				// TODO Auto-generated method stub
 			}
 		});

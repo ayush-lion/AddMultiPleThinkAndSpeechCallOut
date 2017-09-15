@@ -20,7 +20,7 @@ public class InstructionPanel extends JPanel {
 	Image tutor_image;
 	Image student_image;
 	Image tutor_ins_image;
-	Image student_ins_image;
+	Image student_ins_image; 
 	String tutor_ins;
 	String student_ins;
 	boolean isprovided = false;
@@ -109,7 +109,7 @@ public class InstructionPanel extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		// super.paint(g);
-		System.out.println("painted");
+		//System.out.println("painted");
 		controller.DrawInstructionPanel(g);
 	}
 

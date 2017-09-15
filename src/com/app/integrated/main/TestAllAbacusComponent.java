@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,6 +40,7 @@ import com.app.instruction.panel.InstructionPanel;
 import com.app.instructions.beans.Action;
 import com.app.instructions.compiler.InstructionCompiler;
 import com.app.instructions.compiler.exception.CompilerException;
+import com.app.panel.MainPanel;
 import com.app.sound.DownloadSpeech;
 import com.app.test.TextAreaRenderer;
 import com.app.topic.panel.TopicPanel;
@@ -112,10 +114,10 @@ public class TestAllAbacusComponent extends JFrame {
 	private int abacus_height = 50;
 
 	private int instruction_width = 100;
-	private int instruction_height = 20;
+	private int instruction_height = 10;
 
 	private int image_width = 100;
-	private int image_hight = 10;
+	private int image_hight = 0;
 
 	private TopicPanel topicPanel;
 	private AbacusPanel abacusPanel;
@@ -144,10 +146,17 @@ public class TestAllAbacusComponent extends JFrame {
 
 	private JTable table;
 	private JPanel mainPanel;
+	private MainPanel mPanel;
 
 	public TestAllAbacusComponent() throws Throwable {
 
+		ArrayList<String> aList = new ArrayList<>();
+
 		try {
+
+			aList.add("Abacus. Lets start learning mind math !!! 1");
+			aList.add("Abacus. Lets start learning mind math !!! 2");
+			aList.add("Abacus. Lets start learning mind math !!! 3");
 
 			mainPanel = new JPanel();
 			mainPanel.setBounds(getPosX(), getPosY(), getMainPanelWidth(), getMainPanelheight());
@@ -159,22 +168,23 @@ public class TestAllAbacusComponent extends JFrame {
 
 			topicPanel = new TopicPanel();
 			abacusPanel = new AbacusPanel();
-			instructionpanel = new InstructionPanel();
 			imagePanel = new ImagePanel();
+			mPanel = new MainPanel(aList);
 
-			imagePanel.drawLeftLabel("");
-			imagePanel.drawRightLabel("");
+			// imagePanel.drawLeftLabel("");
+			// imagePanel.drawRightLabel("");
 
 			setBoundsTopic();
 			setBoundsAbacus();
 			setBoundsInstruction();
-			setBoundsImage();
+			// setBoundsImage();
 
 			mainPanel.setLayout(null);
 			mainPanel.add(topicPanel);
 			mainPanel.add(abacusPanel);
-			mainPanel.add(instructionpanel);
-			mainPanel.add(imagePanel);
+			mainPanel.add(mPanel);
+
+			// mainPanel.add(imagePanel);
 
 			this.setResizable(true);
 			this.setTitle("Abacus. Lets start learning mind math !!!");
@@ -230,11 +240,11 @@ public class TestAllAbacusComponent extends JFrame {
 	}
 
 	public void setBoundsInstruction() {
-		instructionpanel.setBounds(getPosX(),
+		mPanel.setBounds(getPosX(),
 				(getMainPanelheight() * getTopic_height() / 100) + (getMainPanelheight() * getAbacus_height() / 100),
 				(getMainPanelWidth() * getInstruction_width()) / 100,
 				(getMainPanelheight() * getInstruction_height() / 100));
-		instructionpanel.setBackground(Color.gray);
+		mPanel.setBackground(Color.yellow);
 
 	}
 
@@ -243,6 +253,7 @@ public class TestAllAbacusComponent extends JFrame {
 				(getMainPanelheight() * getTopic_height() / 100) + (getMainPanelheight() * getAbacus_height() / 100)
 						+ (getMainPanelheight() * getInstruction_height() / 100),
 				(getMainPanelWidth() * getImage_width() / 100), (getMainPanelheight() * getImage_hight() / 100));
+		// instructionpanel.setBackground(Color.yellow);
 
 	}
 
@@ -469,29 +480,30 @@ public class TestAllAbacusComponent extends JFrame {
 
 				setInstruction_height(Integer.parseInt(performer.getInstructionHight().replace("null", "")));
 				setInstruction_width(Integer.parseInt(performer.getInstructionWidth().replace("null", "")));
+				
 
-				setImage_hight(Integer.parseInt(performer.getActorHight().replace("null", "")));
-				setImage_width(Integer.parseInt(performer.getActorWidth().replace("null", "")));
-
+				// setImage_hight(Integer.parseInt(performer.getActorHight().replace("null", "")));
+				// setImage_width(Integer.parseInt(performer.getActorWidth().replace("null", "")));
+				
+				//mPanel.showInstruction();
+				
 				setBoundsTopic();
 				setBoundsAbacus();
 				setBoundsInstruction();
-				setBoundsImage();
+				//setBoundsImage();
 
 				topicPanel.setTopicName(performer.getTopicName());
 				topicPanel.setFontName(performer.getTopicName());
 				topicPanel.setFontSize(Integer.parseInt(performer.getComponentSize()));
-				
-				imagePanel.setTutorspeech(performer.getTutorSpeech());
-				imagePanel.setStudentspeech(performer.getStudentSpeech());
-				
-				imagePanel.drawLeftLabel("");
-				imagePanel.drawRightLabel("");
-				
+
+				// imagePanel.setTutorspeech(performer.getTutorSpeech());
+				// imagePanel.setStudentspeech(performer.getStudentSpeech());
+
 				topicPanel.repaint();
-				instructionpanel.repaint();
+				/*instructionpanel.repaint();*/
+				
 				abacusPanel.repaint();
-			
+
 				// TODO Auto-generated method stub
 			}
 		});
@@ -525,7 +537,7 @@ public class TestAllAbacusComponent extends JFrame {
 		try {
 			abacusPanel.hideFingers(Boolean.TRUE);
 			abacusPanel.initializeAbacus();
-			instructionpanel.Initialize_Instruction_Panel(instructionpanel);
+			// instructionpanel.Initialize_Instruction_Panel(instructionpanel);
 			// compile("/Users/Panwar/Desktop/AppInstruction.xlsx");
 		} catch (Exception e) {
 			e.printStackTrace();

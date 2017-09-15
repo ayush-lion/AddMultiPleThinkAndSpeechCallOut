@@ -3,7 +3,6 @@ package com.app.integrated.main;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -21,6 +20,7 @@ public class Performer implements Runnable {
 
 	LinkedHashMap<String, HashMap<String, List<Action>>> data;
 
+	String instruction;
 	private String align;
 	private String teacherAlign;
 	private String studentAlign;
@@ -43,10 +43,29 @@ public class Performer implements Runnable {
 	private String name;
 	private String componentSize;
 	private int numOfRow;
+
+	public String getTutorThink() {
+		return tutorThink;
+	}
+
+	public void setTutorThink(String tutorThink) {
+		this.tutorThink = tutorThink;
+	}
+
+	public String getStudentThink() {
+		return studentThink;
+	}
+
+	public void setStudentThink(String studentThink) {
+		this.studentThink = studentThink;
+	}
+
 	private int numOfCols;
-	
+
 	private String tutorSpeech;
 	private String StudentSpeech;
+	private String tutorThink;
+	private String studentThink;
 
 	private Thread readerThread;
 	InstructionPanel instructionPanel;
@@ -153,6 +172,14 @@ public class Performer implements Runnable {
 
 	public String getImage() {
 		return image;
+	}
+
+	public String getInstruction() {
+		return instruction;
+	}
+
+	public void setInstruction(String instruction) {
+		this.instruction = instruction;
 	}
 
 	public void setImage(String image) {
@@ -404,7 +431,6 @@ public class Performer implements Runnable {
 			if (getPlaySound() != null && getPlaySound().getClip() != null) {
 				getPlaySound().stopClip();
 			}
-
 		}
 	}
 
@@ -415,37 +441,24 @@ public class Performer implements Runnable {
 		int i = 0;
 		HashMap<String, String> actionMap = new HashMap<String, String>();
 		for (Entry<String, HashMap<String, List<Action>>> entry : entrySet) {
-			Object[] tableRow = new Object[9];
 			String key = entry.getKey();
-			tableRow[0] = key;
+
 			HashMap<String, List<Action>> map = entry.getValue();
 			Set<Entry<String, List<Action>>> sEntry = map.entrySet();
 			for (Entry<String, List<Action>> entry2 : sEntry) {
 				i++;
-				String instruction = entry2.getKey();
-				
+				instruction = entry2.getKey();
+				setInstruction(instruction);
+				System.out.println(getInstruction());
+
 				ArrayList<String> strings = new ArrayList<>(Arrays.asList(instruction.split("")));
-					if (instruction.contains("Learning")) {
-						String s = instruction.replace("<Topic>", "");
-						String s2 = s.replace("</Topic>", "");
-						setTopicName(s2);
-						System.out.println(s);
-					}
-					else
-				  if(instruction.contains("TS:")) 
-					{
-						String s = instruction.replace("TS:","");
-						setTutorSpeech(s);
-						System.out.print(getTutorSpeech());
-					}
-				  else
-					if(instruction.contains("SS:")) 
-					{
-						String s = instruction.replace("SS:", "");
-						setStudentSpeech(s);
-						System.out.print(getStudentSpeech());
+				if (instruction.contains("Learning")) {
+					String s = instruction.replace("<Topic>", "");
+					String s2 = s.replace("</Topic>", "");
+					String s3 = s2.replace("\"", " ");
+					setTopicName(s3);
 				}
-				
+
 				// instructionPanel.performinstruction(instruction, instructionPanel);
 				List<Action> listOfActions = entry2.getValue();
 				for (Action actionlist : listOfActions) {
@@ -495,15 +508,7 @@ public class Performer implements Runnable {
 						setName((actionlist.getComponent().getName()));
 						setAlign(actionlist.getComponent().getAlign());
 
-						System.out.println("number of rods:" + getNumOfRods());
-						System.out.println("name of component:" + getName());
-
-						System.out.println("alignment of teacher:" + getTeacherAlign());
-						System.out.println("alignment of Student:" + getStudentAlign());
-
-						System.out.println("get align:" + getAlign());
-
-						// setImage((actionlist.getComponent().getImage()));
+						setImage((actionlist.getComponent().getImage()));
 					}
 				}
 			}

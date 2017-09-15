@@ -1,4 +1,4 @@
-/*package com.app.instruction.main;
+package com.app.instruction.main;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -51,16 +51,16 @@ public class TestInstructionComponent extends JFrame {
 
 	private JPanel contentPane;
 	private InstructionPanel panel;
-	*//**
+	/**
 	 * @return the panel
-	 *//*
+	 */
 	public InstructionPanel getPanel() {
 		return panel;
 	}
 
-	*//**
+	/**
 	 * @param panel the panel to set
-	 *//*
+	 */
 	public void setPanel(InstructionPanel panel) {
 		this.panel = panel;
 	}
@@ -74,24 +74,24 @@ public class TestInstructionComponent extends JFrame {
 	private Voice voice;
 	InstructionPerformer performer;
 
-	*//**
+	/**
 	 * @return the filename
-	 *//*
+	 */
 	public String getFilename() {
 		return filename;
 	}
 
-	*//**
+	/**
 	 * @param filename the filename to set
-	 *//*
+	 */
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
 
-	*//**
+	/**
 	 * Launch the application.
 	 * @throws Throwable 
-	 *//*
+	 */
 	public static void main(String[] args) throws Throwable {
 		TestInstructionComponent ob = new TestInstructionComponent();
 		
@@ -107,10 +107,10 @@ public class TestInstructionComponent extends JFrame {
 		});
 	}
 
-	*//**
+	/**
 	 * Create the frame.
 	 * @throws Throwable 
-	 *//*
+	 */
 	public TestInstructionComponent() throws Throwable {
 		this.setBounds(1, 1, 870, 592);
 		panel = new InstructionPanel();
@@ -327,4 +327,3 @@ public class TestInstructionComponent extends JFrame {
 		
 	}
 	}
-*/

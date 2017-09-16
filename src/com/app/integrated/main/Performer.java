@@ -75,6 +75,15 @@ public class Performer implements Runnable {
 	private VoiceManager vm = null;
 	private Voice voice = null;
 	private boolean isPlayRobotics;
+	private StringBuffer sb;
+
+	public StringBuffer getSb() {
+		return sb;
+	}
+
+	public void setSb(StringBuffer sb) {
+		this.sb = sb;
+	}
 
 	/**
 	 * @return the isPlayRobotics
@@ -449,26 +458,33 @@ public class Performer implements Runnable {
 				i++;
 				instruction = entry2.getKey();
 				setInstruction(instruction);
-				System.out.println(getInstruction());
 
 				ArrayList<String> strings = new ArrayList<>(Arrays.asList(instruction.split("")));
+
 				if (instruction.contains("Learning")) {
 					String s = instruction.replace("<Topic>", "");
 					String s2 = s.replace("</Topic>", "");
 					String s3 = s2.replace("\"", " ");
 					setTopicName(s3);
+					System.out.println(getTopicName());
 				}
 
+				/*String[] allInstruction = instruction.split("");
+				for (i = 0; i < allInstruction.length; i++) {
+					sb.append(allInstruction[i]);
+					setSb(sb);
+					System.out.println(getSb());
+				}*/
+
 				// instructionPanel.performinstruction(instruction, instructionPanel);
+
 				List<Action> listOfActions = entry2.getValue();
 				for (Action actionlist : listOfActions) {
 
 					if (actionlist.getActionName().contains("Font")) {
 						setName(String.valueOf(actionlist.getFont().getName()));
 						setComponentSize(String.valueOf(actionlist.getFont().getSize()));
-
 					}
-
 					if (actionlist.getActionName().contains("Layout")) {
 						setNumOfRow((actionlist.getLayout().getNumOfRow()));
 						setNumOfCols((actionlist.getLayout().getNumOfCols()));
@@ -477,7 +493,6 @@ public class Performer implements Runnable {
 							if (j == 0) {
 								setTopicHeight((String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
 								setTopicWidth((String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
-
 							}
 							if (j == 1) {
 								setAbacusHight((String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
@@ -489,11 +504,6 @@ public class Performer implements Runnable {
 										(String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
 								setInstructionWidth(
 										(String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
-
-							}
-							if (j == 3) {
-								setActorHight((String.valueOf(actionlist.getLayout().getRows().get(j).getHeight())));
-								setActorWidth((String.valueOf(actionlist.getLayout().getRows().get(j).getWidth())));
 
 							}
 						}

@@ -35,7 +35,7 @@ public class TopicPanel extends JPanel {
 		Dimension d = this.getPreferredSize();
 		g.setFont(new Font(getFontName(), Font.PLAIN, getFontSize()));
 		g.setColor(Color.black);
-		g.drawString(getTopicName(), 400, 20);
+		g.drawString(getTopicName(), 400, 35);
 	}
 
 	public int getTexttopicposX() {

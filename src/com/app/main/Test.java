@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import com.app.integrated.main.Performer;
 import com.app.panel.MainPanel;
 
 /**
@@ -17,21 +18,20 @@ import com.app.panel.MainPanel;
 public class Test extends JFrame {
 	ArrayList<String> aList = new ArrayList<String>();
 	MainPanel mPanel ;
+	Performer performer;
 	
 	private static final long serialVersionUID = 1L;
 
 	public Test() {
-		
 		super("Test Actors and Callouts");
+		performer = new Performer();
+
+	    System.out.println("hello:"+performer.getSb());
 		
-		aList.add("Good Morning Students how ");
-		aList.add("Good Morning Students how are");
-		aList.add("Good Morning Students ");
-		aList.add("Good Morning Students 1");
-		aList.add("Good Morning Students 2");
-		aList.add("Good Morning Students 3");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		mPanel = new MainPanel(aList);
+		
 		this.add(mPanel);
 		this.setSize(800, 400);
 		this.setVisible(true); 
